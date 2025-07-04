@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Living Series | LuxeLiving Interiors</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Inter&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      background: #fdfdfd;
+    }
+
+    header {
+      padding: 80px 20px 20px;
+      text-align: center;
+      background: #f8f6f1;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.05);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+
+    .product-info {
+      padding: 20px;
+      flex-grow: 1;
+    }
+
+    .product-info h3 {
+      font-family: 'Cormorant Garamond', serif;
+      margin: 0 0 10px;
+      font-size: 1.3rem;
+    }
+
+    .product-price {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .buy-btn {
+      background: #CBA135;
+      color: white;
+      padding: 10px;
+      margin: 15px;
+      text-align: center;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .buy-btn:hover {
+      background: #a07f2a;
+    }
+
+    #formModal {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 30px;
+      max-width: 500px;
+      width: 90%;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-content label {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .modal-content input,
+    .modal-content select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .payment-options {
+      display: flex;
+      flex-direction: column;
+      margin-top: 10px;
+      gap: 10px;
+    }
+
+    .payment-options label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+    }
+
+    .payment-options input[type="radio"] {
+      margin: 0;
+      transform: translateY(1px);
+    }
+
+    @media (max-width: 600px) {
+      .modal-content {
+        width: 95%;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1 class="section-title">Living Series</h1>
+  <p>Elevate your living space with timeless comfort and luxury.</p>
+</header>
+
+<div class="products-grid" id="productList"></div>
+
+<div id="formModal">
+  <div class="modal-content">
+    <h2>Enter Your Details</h2>
+    <label for="custName">Full Name</label>
+    <input type="text" id="custName">
+
+    <label for="custEmail">Email</label>
+    <input type="email" id="custEmail">
+
+    <label for="custPhone">Phone Number</label>
+    <input type="text" id="custPhone">
+
+    <label for="custState">State</label>
+    <select id="custState"></select>
+
+    <label for="custDistrict">District</label>
+    <select id="custDistrict"></select>
+
+    <label for="custAddress">Full Address</label>
+    <input type="text" id="custAddress">
+
+    <label for="custPin">PIN Code</label>
+    <input type="text" id="custPin">
+
+    <label>Payment Method</label>
+    <div class="payment-options">
+      <label><input type="radio" name="paymentMethod" value="upi">Pay via UPI</label>
+      <label><input type="radio" name="paymentMethod" value="cod">Cash on Delivery</label>
+    </div>
+
+    <button class="buy-btn" onclick="submitOrder()">Place Order</button>
+  </div>
+</div>
+
+<script>
+
+
+ emailjs.init("Hcvq6oNPEpYMaBg_J");
+
+
+
+const indianStates = {
+  "Andhra Pradesh": ["Anantapur", "Chittoor", "East Godavari", "Guntur"],
+  "Delhi": ["Central Delhi", "East Delhi", "New Delhi"],
+  "Karnataka": ["Bangalore Urban", "Mysore", "Mangalore"],
+  "Kerala": ["Thiruvananthapuram", "Kochi", "Kozhikode"],
+  "Maharashtra": ["Mumbai", "Pune", "Nagpur"],
+  "Tamil Nadu": ["Chennai", "Coimbatore", "Madurai"],
+  "Uttar Pradesh": ["Lucknow", "Kanpur", "Varanasi"],
+  "West Bengal": ["Kolkata", "Howrah", "Darjeeling"]
+};
+
+const stateSelect = document.getElementById('custState');
+const districtSelect = document.getElementById('custDistrict');
+
+function populateStates() {
+  stateSelect.innerHTML = '<option value="">Select State</option>';
+  Object.keys(indianStates).forEach(state => {
+    const opt = document.createElement('option');
+    opt.value = state;
+    opt.textContent = state;
+    stateSelect.appendChild(opt);
+  });
+}
+
+function populateDistricts() {
+  const selectedState = stateSelect.value;
+  districtSelect.innerHTML = '<option value="">Select District</option>';
+  if (indianStates[selectedState]) {
+    indianStates[selectedState].forEach(dist => {
+      const opt = document.createElement('option');
+      opt.value = dist;
+      opt.textContent = dist;
+      districtSelect.appendChild(opt);
+    });
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  populateStates();
+  stateSelect.addEventListener('change', populateDistricts);
+});
+
+const products = [
+  { name: "Modern Luxe Sofa", image: "https://images.unsplash.com/photo-1582582423086-d788f0c622c5", price: 34999 },
+  { name: "Elegant Coffee Table", image: "https://images.unsplash.com/photo-1615874959474-df130d7eb4d9", price: 1 },
+  { name: "Contemporary Lounge Chair", image: "https://images.unsplash.com/photo-1549187774-b4e9b0445b05", price: 17999 },
+  { name: "Handcrafted Bookshelf", image: "https://images.unsplash.com/photo-1616628182509-63019f3b3c84", price: 21999 }
+];
+
+let selectedProduct;
+
+function renderProducts(list) {
+  const container = document.getElementById('productList');
+  container.innerHTML = '';
+  list.forEach((product, index) => {
+    container.innerHTML += `
+      <div class="product-card">
+        <img src="${product.image}" alt="${product.name}">
+        <div class="product-info">
+          <h3>${product.name}</h3>
+          <p>Crafted with precision and elegance.</p>
+          <div class="product-price">₹${product.price.toLocaleString()}</div>
+        </div>
+        <button class="buy-btn" onclick="openForm(${index})">Buy Now</button>
+      </div>
+    `;
+  });
+}
+
+function openForm(index) {
+  selectedProduct = products[index];
+  document.getElementById('formModal').style.display = 'flex';
+}
+
+function submitOrder() {
+  const name = document.getElementById('custName').value;
+  const email = document.getElementById('custEmail').value;
+  const phone = document.getElementById('custPhone').value;
+  const state = document.getElementById('custState').value;
+  const district = document.getElementById('custDistrict').value;
+  const address = document.getElementById('custAddress').value;
+  const pin = document.getElementById('custPin').value;
+  const method = document.querySelector('input[name="paymentMethod"]:checked');
+
+  if (!name || !email || !phone || !address || !pin || !state || !district || !method) {
+    alert('Please fill all fields and select payment method.');
+    return;
+  }
+
+  if (method.value === 'upi') {
+    const options = {
+      key: 'rzp_live_LsOtu3jPLnqjXr', // Replace with your Razorpay key
+      amount: selectedProduct.price * 100, // in paise
+      currency: 'INR',
+      name: 'LuxeLiving',
+      description: selectedProduct.name,
+      image: 'https://yourwebsite.com/logo.png', // Optional
+      handler: function (response) {
+        // Razorpay payment succeeded
+        emailjs.send("service_5d7cdhp", "template_vhspbdj", {
+          name, email, phone, state, district, address, pin,
+          product: selectedProduct.name,
+          price: selectedProduct.price,
+          payment_id: response.razorpay_payment_id
+        }).then(() => {
+          alert("Order placed successfully!");
+          document.getElementById('formModal').style.display = 'none';
+        }).catch(() => {
+          alert("Payment done, but failed to send order details. Please contact support.");
+        });
+      },
+      prefill: {
+        name: name,
+        email: email,
+        contact: phone
+      },
+      theme: {
+        color: "#CBA135"
+      }
+    };
+    const rzp = new Razorpay(options);
+    rzp.open();
+  } else {
+    // COD order, no payment verification
+    emailjs.send("service_5d7cdhp", "template_vhspbdj", {
+      name, email, phone, state, district, address, pin,
+      product: selectedProduct.name,
+      price: selectedProduct.price,
+      payment_id: "COD"
+    }).then(() => {
+      alert("Order placed successfully! We will contact you soon.");
+      document.getElementById('formModal').style.display = 'none';
+    }).catch(() => {
+      alert("Failed to send order details. Please try again.");
+    });
+  }
+}
+
+//mongodb+srv://shinass987:<bigsmoke444>@cluster0.edttjxi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+
+renderProducts(products);
+</script>
+</body>
+</html>

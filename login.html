@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LuxeLiving Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f3f3f3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 100%;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #CBA135;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #a5852b;
+    }
+    .toggle {
+      margin-top: 15px;
+      text-align: center;
+      color: #666;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 id="form-title">Login</h2>
+    <input type="text" id="name" placeholder="Full Name (Register only)" style="display:none">
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="submitForm()" id="form-btn">Login</button>
+    <div class="toggle" onclick="toggleForm()">Don't have an account? Register</div>
+  </div>
+
+  <script>
+    let isLogin = true;
+
+    function toggleForm() {
+      isLogin = !isLogin;
+      document.getElementById("form-title").innerText = isLogin ? "Login" : "Register";
+      document.getElementById("form-btn").innerText = isLogin ? "Login" : "Register";
+      document.getElementById("name").style.display = isLogin ? "none" : "block";
+      document.querySelector(".toggle").innerText = isLogin ? "Don't have an account? Register" : "Already have an account? Login";
+    }
+
+    async function submitForm() {
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const url = isLogin ? '/login' : '/register';
+
+      const body = isLogin ? { email, password } : { name, email, password };
+
+      const res = await fetch(`http://localhost:5000${url}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        if (isLogin) {
+          localStorage.setItem('token', data.token);
+          alert("Login successful!");
+          window.location.href = "your-products.html";
+        } else {
+          alert("Registered successfully! You can login now.");
+          toggleForm();
+        }
+      } else {
+        alert("Error: " + (data.message || "Something went wrong"));
+      }
+    }
+  </script>
+</body>
+</html>

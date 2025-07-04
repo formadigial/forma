@@ -1,0 +1,70 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Orders</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f9f9f9;
+      padding: 40px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .order {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+      margin-bottom: 20px;
+    }
+    .order p {
+      margin: 6px 0;
+    }
+  </style>
+</head>
+<body>
+  <h2>Your Orders</h2>
+  <div id="orders"></div>
+
+  <script>
+    async function fetchOrders() {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        alert('Login first');
+        window.location.href = 'login.html';
+        return;
+      }
+      const res = await fetch('http://localhost:5000/user-orders', {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      const data = await res.json();
+      if (res.ok) {
+        const container = document.getElementById('orders');
+        if (data.length === 0) {
+          container.innerHTML = '<p>No orders yet.</p>';
+        } else {
+          data.forEach(order => {
+            container.innerHTML += `
+              <div class="order">
+                <p><strong>Product:</strong> ${order.product}</p>
+                <p><strong>Price:</strong> ₹${order.price}</p>
+                <p><strong>Status:</strong> ${order.payment_id === 'COD' ? 'Cash on Delivery' : 'Paid'}</p>
+                <p><strong>Placed on:</strong> ${new Date(order.createdAt).toLocaleString()}</p>
+              </div>
+            `;
+          });
+        }
+      } else {
+        alert('Failed to fetch orders. Please login again.');
+        localStorage.removeItem('token');
+        window.location.href = 'login.html';
+      }
+    }
+    fetchOrders();
+  </script>
+</body>
+</html>
