@@ -11,8 +11,7 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Inter&display=swap" rel="stylesheet">
 
-  <!-- Icons -->
-  <script src="https://unpkg.com/feather-icons" defer></script>
+
 
   <!-- AOS Animation -->
   <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet">
@@ -394,9 +393,14 @@ footer {
       <li><a href="#contact">Contact</a></li>
       <li id="auth-buttons">
         <a href="login.html" id="loginBtn">Login</a>
-        <a href="register.html" id="registerBtn">Register</a>
+       
       </li>
-      <li style="display: none;" id="myProductsBtn"><a href="your-products.html">My Products</a></li>
+<li id="user-info" style="display: none; align-items: center; gap: 8px;">
+  <img id="user-photo" src="" alt="Profile" style="width: 28px; height: 28px; border-radius: 50%;" />
+  <span id="user-email" style="color: #666; font-size: 0.9rem;"></span>
+</li>
+
+      <li style="display: none;" id="myProductsBtn"><a href="yourproducts.html">My Products</a></li>
     </ul>
   </nav>
 
@@ -414,35 +418,35 @@ footer {
   <h2 class="section-title">Browse by Category</h2>
   <div class="category-grid">
     <a href="living.html" class="category-card">
-      <div class="category-image" style="background-image: url('images/categories/living.jpg');"></div>
+      <div class="category-image" style="background-image: url('images/living.jpg');"></div>
       <div class="category-info">
         <h3>Living Series</h3>
         <p>Beautiful living room pieces that speak your style.</p>
       </div>
     </a>
     <a href="bedroom.html" class="category-card">
-      <div class="category-image" style="background-image: url('images/categories/bedroom.jpg');"></div>
+      <div class="category-image" style="background-image: url('images/bedroom.jpg');"></div>
       <div class="category-info">
         <h3>Bedroom Series</h3>
         <p>Comfort and elegance for your peaceful retreat.</p>
       </div>
     </a>
     <a href="dining.html" class="category-card">
-      <div class="category-image" style="background-image: url('images/categories/dining.jpg');"></div>
+      <div class="category-image" style="background-image: url('images/dining.jpg');"></div>
       <div class="category-info">
         <h3>Dining Series</h3>
         <p>Gather round for sophisticated dining experiences.</p>
       </div>
     </a>
     <a href="storage.html" class="category-card">
-      <div class="category-image" style="background-image: url('images/categories/storage.jpg');"></div>
+      <div class="category-image" style="background-image: url('images/storage.webp');"></div>
       <div class="category-info">
         <h3>Storage Series</h3>
         <p>Smart, stylish solutions to organize your space.</p>
       </div>
     </a>
     <a href="interiors.html" class="category-card">
-      <div class="category-image" style="background-image: url('images/categories/interiors.jpg');"></div>
+      <div class="category-image" style="background-image: url('images/interior.jpg');"></div>
       <div class="category-info">
         <h3>Interior Decor</h3>
         <p>Curated decor accents to bring warmth and style.</p>
@@ -462,9 +466,9 @@ footer {
   <section>
     <h2 class="section-title">Our Aesthetic</h2>
     <div class="gallery">
-      <img src="https://images.unsplash.com/photo-1598300056390-b6f2d671f1e5" alt="Living Room" loading="lazy">
-      <img src="https://images.unsplash.com/photo-1623361323834-35a3a59be44c" alt="Dining Room" loading="lazy">
-      <img src="https://images.unsplash.com/photo-1616628182509-63019f3b3c84" alt="Bedroom" loading="lazy">
+      <img src="images/livingroom.jpg" alt="Living Room" loading="lazy">
+      <img src="images/diningroom.jpg" alt="Dining Room" loading="lazy">
+      <img src="images/bed.jpg" alt="Bedroom" loading="lazy">
     </div>
   </section>
 
@@ -544,8 +548,80 @@ footer {
     });
   });
 </script>
+<!-- Paste the full head and styles you already had -->
+...
+</footer>
+<!-- Feather icons & AOS -->
+<script defer src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    AOS.init({ duration: 800, once: true });
+  });
+</script>
+
+<!-- Firebase Auth Handling -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBGM4DkuRRLhL-RhXoNrgP2LUFQyNVCKDQ",
+    authDomain: "test-a21c6.firebaseapp.com",
+    projectId: "test-a21c6",
+    storageBucket: "test-a21c6.appspot.com",
+    messagingSenderId: "241202330354",
+    appId: "1:241202330354:web:47a72aaf3232005b592e6b"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const authButtons = document.getElementById('auth-buttons');
+    const myProductsBtn = document.getElementById('myProductsBtn');
+    const userInfo = document.getElementById('user-info');
+    const userEmail = document.getElementById('user-email');
+    const userPhoto = document.getElementById('user-photo');
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        authButtons.style.display = 'none';
+        myProductsBtn.style.display = 'inline-block';
+        userInfo.style.display = 'flex';
+
+        userEmail.textContent = user.email || 'User';
+        if (user.photoURL) {
+          userPhoto.src = user.photoURL;
+        } else {
+          userPhoto.src = 'https://www.gravatar.com/avatar?d=mp&s=200';
+        }
+
+      } else {
+        authButtons.style.display = 'inline-block';
+        myProductsBtn.style.display = 'none';
+        userInfo.style.display = 'none';
+      }
+    });
+  });
+
+  // Hamburger menu toggle
+  window.toggleMenu = function(icon) {
+    icon.classList.toggle("active");
+    document.getElementById("nav-links").classList.toggle("show");
+  };
+</script>
+
+<!-- PLACE UPDATED JS HERE -->
+</script>
+</body>
+</html>
 
   <script>
+
+
+
+
+
    function toggleMenu(icon) {
     icon.classList.toggle("active");
     document.getElementById("nav-links").classList.toggle("show");
