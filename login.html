@@ -84,6 +84,21 @@
     <div class="message" id="message"></div>
     <div class="toggle" onclick="toggleForm()">Don't have an account? Register</div>
   </div>
+<button onclick="logoutUser()" id="logoutBtn" style="display:none;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #CBA135;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  z-index: 1000;
+">
+  Logout
+</button>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
@@ -118,37 +133,43 @@
     };
 
     window.submitForm = async () => {
-      const email = emailEl.value.trim();
-      const password = passwordEl.value;
-      const confirm = confirmPasswordEl.value;
-      const name = nameEl.value.trim();
+  const email = emailEl.value.trim();
+  const password = passwordEl.value;
+  const confirm = confirmPasswordEl.value;
+  const name = nameEl.value.trim();
 
-      clearErrors();
+  clearErrors();
 
-      if (!email.includes("@")) showError("email-error");
-      if (password.length < 6) showError("password-error");
-      if (!isLogin && confirm !== password) showError("confirm-error");
+  if (!email.includes("@")) showError("email-error");
+  if (password.length < 6) showError("password-error");
+  if (!isLogin && confirm !== password) showError("confirm-error");
 
-      if (document.querySelectorAll(".error-text:visible").length > 0) return;
+  if ([...document.querySelectorAll(".error-text")].some(el => el.style.display === 'block')) return;
 
-      try {
-        if (isLogin) {
-          await setPersistence(auth, browserLocalPersistence);
-          const userCred = await signInWithEmailAndPassword(auth, email, password);
-          messageEl.className = "message success";
-          messageEl.innerText = `Welcome back, ${userCred.user.email}`;
-          setTimeout(() => window.location.href = "home.html", 2000);
-        } else {
-          await createUserWithEmailAndPassword(auth, email, password);
-          messageEl.className = "message success";
-          messageEl.innerText = "Registration successful! Please login now.";
-          toggleForm();
-        }
-      } catch (err) {
-        messageEl.className = "message error";
-        messageEl.innerText = "❌ " + err.message;
-      }
-    };
+
+  try {
+    if (isLogin) {
+      await setPersistence(auth, browserLocalPersistence);
+      const userCred = await signInWithEmailAndPassword(auth, email, password);
+      messageEl.className = "message success";
+      messageEl.innerText = `✅ Login successful! Welcome, ${userCred.user.email}`;
+      setTimeout(() => window.location.href = "home.html", 2000);
+    } else {
+      await createUserWithEmailAndPassword(auth, email, password);
+      messageEl.className = "message success";
+      messageEl.innerText = "✅ Registration successful! Redirecting to login...";
+      setTimeout(() => {
+        toggleForm();
+        messageEl.innerText = "";
+      }, 2000);
+    }
+  } catch (err) {
+    messageEl.className = "message error";
+    messageEl.innerText = "❌ " + (err.message || "Something went wrong");
+  }
+};
+
+   
 
     window.togglePassword = (id) => {
       const field = document.getElementById(id);
@@ -179,5 +200,51 @@
       document.querySelectorAll(".error-text").forEach(el => el.style.display = "none");
     }
   </script>
+
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+  import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBGM4DkuRRLhL-RhXoNrgP2LUFQyNVCKDQ",
+    authDomain: "test-a21c6.firebaseapp.com",
+    projectId: "test-a21c6",
+    storageBucket: "test-a21c6.appspot.com",
+    messagingSenderId: "241202330354",
+    appId: "1:241202330354:web:47a72aaf3232005b592e6b"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  // Check if user is logged in
+  onAuthStateChanged(auth, (user) => {
+    const logoutBtn = document.getElementById("logoutBtn");
+    if (user) {
+      logoutBtn.style.display = "block";
+    } else {
+      logoutBtn.style.display = "none";
+      // Optional: Redirect to login page if unauthenticated
+      if (!window.location.href.includes("login")) {
+        window.location.href = "login.html";
+      }
+    }
+  });
+
+  window.logoutUser = async () => {
+    try {
+      await signOut(auth);
+      alert("👋 You have been logged out!");
+      window.location.href = "login.html";
+    } catch (error) {
+      alert("Logout failed: " + error.message);
+    }
+  };
+</script>
+
+
+
+
 </body>
 </html>
