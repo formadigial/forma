@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us | LuxeLiving Interiors</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Inter&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #2b2b2b;
+      --accent-color: #CBA135;
+      --bg-light: #fdfdfd;
+      --text-color: #2b2b2b;
+      --text-light: #666;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+
+
+
+
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  z-index: 999;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+  z-index: 1001;
+}
+
+.hamburger span {
+  height: 3px;
+  width: 25px;
+  background: var(--primary-color);
+  border-radius: 5px;
+  transition: 0.3s ease;
+}
+
+/* Animate hamburger to X */
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+nav ul li a {
+  position: relative;
+  font-weight: 600;
+}
+
+nav ul li a::after {
+  content: "";
+  display: block;
+  height: 2px;
+  background: var(--accent-color);
+  width: 0;
+  transition: width 0.3s ease;
+}
+
+nav ul li a:hover::after {
+  width: 100%;
+}
+
+/* Mobile drawer */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  nav ul {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background: white;
+    flex-direction: column;
+    display: none;
+    text-align: center;
+    padding: 20px 0;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  }
+
+  nav ul.show {
+    display: flex;
+    animation: slideDown 0.3s ease forwards;
+  }
+
+  nav ul li {
+    padding: 12px 0;
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+
+
+
+
+    header {
+      background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c') no-repeat center center/cover;
+      height: 60vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      position: relative;
+      text-align: center;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 0;
+    }
+
+    .hero-text {
+      z-index: 1;
+      padding: 20px;
+    }
+
+    .hero-text h1 {
+      font-size: 3rem;
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    section {
+      padding: 60px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      text-align: center;
+      margin-bottom: 40px;
+      color: var(--primary-color);
+    }
+
+    .about-text {
+      font-size: 1.05rem;
+      color: var(--text-light);
+      margin-bottom: 40px;
+      line-height: 1.8;
+      text-align: center;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .feature-card {
+      background: #fff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 6px 25px rgba(0,0,0,0.05);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .feature-card h3 {
+      font-size: 1.3rem;
+      color: var(--accent-color);
+      margin-bottom: 12px;
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .feature-card p {
+      font-size: 0.95rem;
+      color: var(--text-light);
+    }
+
+    footer {
+      background: var(--primary-color);
+      color: white;
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+
+     @media (max-width: 768px) {
+      .hamburger {
+        display: flex;
+      }
+      nav ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: white;
+        padding: 20px 0;
+      }
+      nav ul.show {
+        display: flex;
+      }
+    }
+
+
+@media (max-width: 768px) {
+  #user-info {
+    justify-content: center !important;
+    padding: 10px 20px;
+  }
+
+  #user-info div {
+    justify-content: center !important;
+    margin: auto;
+  }
+}
+
+
+
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">RAYYANS WOOD PARK</div>
+    <div class="hamburger" onclick="toggleMenu(this)">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <ul id="nav-links">
+          <li><a href="home.html">Home</a></li>
+      <li><a href="products.html">Collection</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+
+      <li><a href="#contact">Contact</a></li>
+      <li id="auth-buttons">
+        <a href="login.html" id="loginBtn">Login</a>
+       
+      </li>
+<li id="user-info" style="display: none;">
+  <div style="display: flex; align-items: center; gap: 8px; max-width: 180px; overflow: hidden;">
+    <img id="user-photo" src="" alt="Profile" style="width: 28px; height: 28px; border-radius: 50%;" />
+    <span id="user-email" style="font-size: 0.85rem; color: #444; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"></span>
+  </div>
+</li>
+
+
+      <li style="display: none;" id="myProductsBtn"><a href="yourproducts.html">My Products</a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <div class="hero-text">
+      <h1>About LuxeLiving</h1>
+    </div>
+  </header>
+
+  <section data-aos="fade-up">
+    <h2 class="section-title">Our Story</h2>
+    <p class="about-text">
+      At LuxeLiving Interiors, we believe that furniture isn't just functional—it's personal. Founded with a passion for artisanal craftsmanship, our journey began with a simple idea: to bring timeless design into every home. From the richness of handpicked materials to the elegance of our aesthetic, every piece is a tribute to enduring beauty and thoughtful living.
+    </p>
+  </section>
+
+  <section data-aos="fade-up">
+    <h2 class="section-title">What Sets Us Apart</h2>
+    <div class="features">
+      <div class="feature-card">
+        <h3>Handcrafted Excellence</h3>
+        <p>Every product is made by skilled artisans with utmost care and precision, ensuring unmatched quality and character.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Timeless Aesthetics</h3>
+        <p>Our designs fuse modern simplicity with classic elegance to create pieces that never go out of style.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Sustainable Vision</h3>
+        <p>We are committed to responsible sourcing and environmentally conscious practices that respect the planet.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-aos="fade-up">
+    <h2 class="section-title">Crafted in Kerala, Loved Nationwide</h2>
+    <p class="about-text">
+      Based in Kothamangalam, Kerala, LuxeLiving is proud to support local artisans and traditional woodwork heritage while delivering modern design to homes across India.
+    </p>
+  </section>
+
+  <footer>
+    &copy; 2025 LuxeLiving Interiors. All rights reserved.
+  </footer>
+
+
+<!-- Firebase Auth + Save Login -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBGM4DkuRRLhL-RhXoNrgP2LUFQyNVCKDQ",
+    authDomain: "test-a21c6.firebaseapp.com",
+    projectId: "test-a21c6",
+    storageBucket: "test-a21c6.appspot.com",
+    messagingSenderId: "241202330354",
+    appId: "1:241202330354:web:47a72aaf3232005b592e6b"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  // Save login across browser sessions
+  setPersistence(auth, browserLocalPersistence).then(() => {
+    onAuthStateChanged(auth, (user) => {
+      const authButtons = document.getElementById('auth-buttons');
+      const myProductsBtn = document.getElementById('myProductsBtn');
+      const userInfo = document.getElementById('user-info');
+      const userEmail = document.getElementById('user-email');
+      const userPhoto = document.getElementById('user-photo');
+
+      if (user) {
+        authButtons.style.display = 'none';
+        myProductsBtn.style.display = 'inline-block';
+        userInfo.style.display = 'flex';
+        userEmail.textContent = user.email || 'User';
+        userPhoto.src = user.photoURL || 'https://www.gravatar.com/avatar?d=mp&s=200';
+      } else {
+        authButtons.style.display = 'inline-block';
+        myProductsBtn.style.display = 'none';
+        userInfo.style.display = 'none';
+      }
+    });
+  }).catch((error) => {
+    console.error("Persistence error:", error);
+  });
+</script>
+
+
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 800, once: true });
+
+  function toggleMenu(icon) {
+    icon.classList.toggle("active");
+    document.getElementById("nav-links").classList.toggle("show");
+  }
+
+
+  </script>
+</body>
+</html>

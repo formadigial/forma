@@ -1,70 +1,165 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Orders</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Orders | LuxeLiving</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Inter', sans-serif;
-      background: #f9f9f9;
-      padding: 40px;
+      background: #f2f4f7;
+      padding: 20px;
+      margin: 0;
     }
+
     h2 {
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .user-info {
       text-align: center;
       margin-bottom: 30px;
     }
-    .order {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-      margin-bottom: 20px;
+
+    .user-info img {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
+
+    .user-info p {
+      margin-top: 10px;
+      font-weight: 600;
+      color: #444;
+    }
+
+    #orders {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .order {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      transition: transform 0.2s;
+    }
+
+    .order:hover {
+      transform: translateY(-5px);
+    }
+
     .order p {
-      margin: 6px 0;
+      margin: 8px 0;
+      color: #333;
+      font-size: 15px;
+    }
+
+    .order strong {
+      color: #555;
+    }
+
+    .status-badge {
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    .status-delivered {
+      background-color: #d1f7d6;
+      color: #1e824c;
+    }
+
+    .status-pending {
+      background-color: #fff2cd;
+      color: #c29d0b;
+    }
+
+    @media (max-width: 500px) {
+      body {
+        padding: 15px;
+      }
+
+      .order {
+        padding: 16px;
+      }
     }
   </style>
 </head>
 <body>
   <h2>Your Orders</h2>
+  <div class="user-info" id="user-info"></div>
   <div id="orders"></div>
 
-  <script>
-    async function fetchOrders() {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        alert('Login first');
-        window.location.href = 'login.html';
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+    import { getFirestore, doc, getDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBGM4DkuRRLhL-RhXoNrgP2LUFQyNVCKDQ",
+      authDomain: "test-a21c6.firebaseapp.com",
+      projectId: "test-a21c6",
+      storageBucket: "test-a21c6.appspot.com",
+      messagingSenderId: "241202330354",
+      appId: "1:241202330354:web:47a72aaf3232005b592e6b"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const userInfoDiv = document.getElementById("user-info");
+    const ordersDiv = document.getElementById("orders");
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        alert("Please login first.");
+        window.location.href = "login.html";
         return;
       }
-      const res = await fetch('http://localhost:5000/user-orders', {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-      const data = await res.json();
-      if (res.ok) {
-        const container = document.getElementById('orders');
-        if (data.length === 0) {
-          container.innerHTML = '<p>No orders yet.</p>';
-        } else {
-          data.forEach(order => {
-            container.innerHTML += `
-              <div class="order">
-                <p><strong>Product:</strong> ${order.product}</p>
-                <p><strong>Price:</strong> ₹${order.price}</p>
-                <p><strong>Status:</strong> ${order.payment_id === 'COD' ? 'Cash on Delivery' : 'Paid'}</p>
-                <p><strong>Placed on:</strong> ${new Date(order.createdAt).toLocaleString()}</p>
-              </div>
-            `;
-          });
-        }
-      } else {
-        alert('Failed to fetch orders. Please login again.');
-        localStorage.removeItem('token');
-        window.location.href = 'login.html';
+
+      const userDoc = await getDoc(doc(db, "users", user.uid));
+      const name = userDoc.exists() ? userDoc.data().name : "";
+      const photo = user.photoURL || "https://www.gravatar.com/avatar?d=mp";
+      userInfoDiv.innerHTML = `
+        <img src="${photo}" alt="User Profile Picture">
+        <p>${name || user.email}</p>
+      `;
+
+      const q = query(collection(db, "orders"), where("userId", "==", user.uid));
+      const snapshot = await getDocs(q);
+
+      if (snapshot.empty) {
+        ordersDiv.innerHTML = "<p style='text-align:center;'>No orders found.</p>";
+        return;
       }
-    }
-    fetchOrders();
+
+      snapshot.forEach(doc => {
+        const order = doc.data();
+        const statusClass = order.status === "Delivered" ? "status-delivered" : "status-pending";
+        const statusLabel = `<span class="status-badge ${statusClass}">${order.status}</span>`;
+        ordersDiv.innerHTML += `
+          <div class="order">
+            <p><strong>Product:</strong> ${order.product}</p>
+            <p><strong>Price:</strong> ₹${order.price}</p>
+            <p><strong>Status:</strong> ${statusLabel}</p>
+            <p><strong>Delivery By:</strong> ${order.deliveryDate ? new Date(order.deliveryDate).toLocaleDateString() : 'Not Set'}</p>
+            <p><strong>Placed On:</strong> ${new Date(order.createdAt).toLocaleString()}</p>
+          </div>
+        `;
+      });
+    });
   </script>
 </body>
 </html>

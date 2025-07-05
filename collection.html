@@ -198,8 +198,6 @@
   line-height: 1;
 }
 
-
-
 .payment-options {
   display: flex;
   flex-direction: column;
@@ -253,12 +251,13 @@
 }
 
 
+
   </style>
 </head>
 <body>
 <header>
-  <h1 class="section-title">Living Series</h1>
-  <p>Elevate your living space with timeless comfort and luxury.</p>
+  <h1 class="section-title">Rayyans Wood Park</h1>
+  <p>Our Collection</p>
 </header>
 
 <div class="products-grid" id="productList"></div>
@@ -285,7 +284,7 @@
   text-align: center;
 "></div>
 
-   <div class="payment-options">
+    <div class="payment-options">
   <label class="payment-card">
     <input type="radio" name="paymentMethod" value="upi" />
     <div class="card-body">
@@ -380,10 +379,19 @@ function hidePopup() {
   });
 
   const products = [
-    { name: "Modern Luxe Sofa", image: "https://images.unsplash.com/photo-1582582423086-d788f0c622c5", price: 34999 },
-    { name: "Elegant Coffee Table", image: "https://images.unsplash.com/photo-1615874959474-df130d7eb4d9", price: 19999 },
-    { name: "Contemporary Lounge Chair", image: "https://images.unsplash.com/photo-1549187774-b4e9b0445b05", price: 17999 },
-    { name: "Handcrafted Bookshelf", image: "https://images.unsplash.com/photo-1616628182509-63019f3b3c84", price: 21999 }
+    
+  { name: "Modern Luxe Sofa", image: "https://images.unsplash.com/photo-1582582423086-d788f0c622c5", price: 34999 },
+  { name: "Elegant Coffee Table", image: "https://images.unsplash.com/photo-1615874959474-df130d7eb4d9", price: 19999 },
+  { name: "Contemporary Lounge Chair", image: "https://images.unsplash.com/photo-1549187774-b4e9b0445b05", price: 17999 },
+  { name: "Handcrafted Bookshelf", image: "https://images.unsplash.com/photo-1616628182509-63019f3b3c84", price: 21999 },
+  { name: "Luxury Recliner Set", image: "https://images.unsplash.com/photo-1615873968403-0e26b9e9d718", price: 28999 },
+  { name: "Wooden TV Stand", image: "https://images.unsplash.com/photo-1600585153961-3b6b68c99c91", price: 16999 },
+  { name: "Classic Ottoman", image: "https://images.unsplash.com/photo-1616627571753-7db9b90dc442", price: 8999 },
+  { name: "Velvet Sectional", image: "https://images.unsplash.com/photo-1606813909361-63fbdac2cf4e", price: 41999 },
+  { name: "Vintage Side Cabinet", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c", price: 18999 },
+  { name: "Minimalist Floor Lamp", image: "https://images.unsplash.com/photo-1616628182509-63019f3b3c84", price: 7499 }
+
+
   ];
 
   let selectedProduct = null;

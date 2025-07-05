@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Orders - LuxeLiving</title>
+  <style>
+    body { font-family: 'Inter', sans-serif; padding: 40px; background: #f9f9f9; }
+    h2 { text-align: center; }
+    .order {
+      background: #fff;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+    .order p { margin: 6px 0; }
+    .btn {
+      padding: 8px 12px;
+      background: #2e7d32;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .btn:hover { background: #1b5e20; }
+  </style>
+</head>
+<body>
+  <h2>Admin: Manage Orders</h2>
+  <div id="orders"></div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+    import { getFirestore, collection, getDocs, updateDoc, doc } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBGM4DkuRRLhL-RhXoNrgP2LUFQyNVCKDQ",
+      authDomain: "test-a21c6.firebaseapp.com",
+      projectId: "test-a21c6",
+      storageBucket: "test-a21c6.appspot.com",
+      messagingSenderId: "241202330354",
+      appId: "1:241202330354:web:47a72aaf3232005b592e6b"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const ordersDiv = document.getElementById("orders");
+
+    async function loadOrders() {
+      const snapshot = await getDocs(collection(db, "orders"));
+      snapshot.forEach(orderDoc => {
+        const order = orderDoc.data();
+        const id = orderDoc.id;
+        const status = order.status || "Pending";
+        const delivered = status === "Delivered" ? "✅ Delivered" : `<button class="btn" onclick="markDelivered('${id}')">Mark as Delivered</button>`;
+
+       ordersDiv.innerHTML += `
+  <div class="order" id="order-${id}">
+    <p><strong>Name:</strong> ${order.name}</p>
+    <p><strong>Product:</strong> ${order.product}</p>
+    <p><strong>Price:</strong> ₹${order.price}</p>
+    <p><strong>Status:</strong> <span id="status-${id}">${order.status || 'Pending'}</span></p>
+
+    <label><strong>Delivery Date:</strong></label>
+    <input type="date" id="date-${id}" value="${order.deliveryDate ? new Date(order.deliveryDate).toISOString().split('T')[0] : ''}" />
+    <button class="btn" onclick="updateDeliveryDate('${id}')">Update Date</button>
+
+    <div id="action-${id}">
+      ${order.status === 'Delivered'
+        ? '✅ Delivered'
+        : `<button class="btn" onclick="markDelivered('${id}')">Mark as Delivered</button>`
+      }
+    </div>
+  </div>
+`;
+
+      });
+    }
+
+   // Mark Delivered
+window.markDelivered = async (orderId) => {
+  await updateDoc(doc(db, "orders", orderId), {
+    status: "Delivered"
+  });
+  document.getElementById(`status-${orderId}`).innerText = "Delivered";
+  document.getElementById(`action-${orderId}`).innerHTML = "✅ Delivered";
+};
+
+// Update Delivery Date
+window.updateDeliveryDate = async (orderId) => {
+  const input = document.getElementById(`date-${orderId}`);
+  const selectedDate = new Date(input.value).getTime();
+
+  if (isNaN(selectedDate)) {
+    alert("Please select a valid date.");
+    return;
+  }
+
+  await updateDoc(doc(db, "orders", orderId), {
+    deliveryDate: selectedDate
+  });
+
+  alert("Delivery date updated!");
+};
+
+    loadOrders();
+  </script>
+</body>
+</html>

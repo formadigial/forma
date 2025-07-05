@@ -374,10 +374,50 @@ footer {
 }
 
 
+
+
+.user-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.85rem;
+}
+
+.user-box img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-box span {
+  color: #444;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 768px) {
+  .user-box {
+    margin-left: 168px;
+    justify-content: center;
+    max-width: 100%;
+  }
+
+  .user-box span {
+    font-size: 0.8rem;
+  }
+}
+
+
   </style>
 </head>
 <body>
-<body>
+
   <nav>
     <div class="logo">RAYYANS WOOD PARK</div>
     <div class="hamburger" onclick="toggleMenu(this)">
@@ -391,14 +431,16 @@ footer {
       <li><a href="materials.html">Materials</a></li>
       <li><a href="gallery.html">Gallery</a></li>
       <li><a href="catalog.html">Catalog</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="contact.html">Contact</a></li>
       <li id="auth-buttons">
         <a href="login.html" id="loginBtn">Login</a>
        
       </li>
-<li id="user-info" style="display: none; align-items: center; gap: 8px;">
-  <img id="user-photo" src="" alt="Profile" style="width: 28px; height: 28px; border-radius: 50%;" />
-  <span id="user-email" style="color: #666; font-size: 0.9rem;"></span>
+<li id="user-info" style="display: none;">
+  <div class="user-box">
+    <img id="user-photo" src="" alt="Profile" />
+    <span id="user-email"></span>
+  </div>
 </li>
 
       <li style="display: none;" id="myProductsBtn"><a href="yourproducts.html">My Products</a></li>
@@ -534,7 +576,7 @@ footer {
   </div>
 
   <div style="text-align: center; margin-top: 30px; font-size: 0.9rem; color: #aaa;">
-    &copy; 2025 Rayyans Wood Park. All rights reserved.
+    &copy; 2025 LuxeLiving Interiors. All rights reserved.
   </div>
 </footer>
 

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us | LuxeLiving Interiors</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Inter&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #2b2b2b;
+      --accent-color: #CBA135;
+      --bg-light: #fdfdfd;
+      --text-color: #2b2b2b;
+      --text-light: #666;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: white;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      z-index: 999;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+      z-index: 1001;
+    }
+
+    .hamburger span {
+      height: 3px;
+      width: 25px;
+      background: var(--primary-color);
+      border-radius: 5px;
+      transition: 0.3s ease;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      position: relative;
+      font-weight: 600;
+    }
+
+    nav ul li a::after {
+      content: "";
+      display: block;
+      height: 2px;
+      background: var(--accent-color);
+      width: 0;
+      transition: width 0.3s ease;
+    }
+
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+
+    @media (max-width: 768px) {
+      .hamburger {
+        display: flex;
+      }
+
+      nav ul {
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: white;
+        flex-direction: column;
+        display: none;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      nav ul.show {
+        display: flex;
+        animation: slideDown 0.3s ease forwards;
+      }
+
+      nav ul li {
+        padding: 12px 0;
+      }
+
+      @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    }
+
+    header {
+      background: url('https://images.unsplash.com/photo-1598300051331-761c7953a2bc') no-repeat center center/cover;
+      height: 60vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      position: relative;
+      text-align: center;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 0;
+    }
+
+    .hero-text {
+      z-index: 1;
+      padding: 20px;
+    }
+
+    .hero-text h1 {
+      font-size: 3rem;
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    section {
+      padding: 60px 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      text-align: center;
+      margin-bottom: 40px;
+      color: var(--primary-color);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    input, textarea {
+      padding: 12px 16px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    button {
+      padding: 14px 20px;
+      font-size: 1rem;
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #b8912e;
+    }
+
+    footer {
+      background: var(--primary-color);
+      color: white;
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+
+    @media (max-width: 768px) {
+  #user-info {
+    justify-content: center !important;
+    padding: 10px 20px;
+  }
+
+  #user-info div {
+    justify-content: center !important;
+    margin: auto;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">RAYYANS WOOD PARK</div>
+    <div class="hamburger" onclick="toggleMenu(this)">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <ul id="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="products.html">Collection</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="materials.html">Materials</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      
+      <li id="auth-buttons"><a href="login.html" id="loginBtn">Login</a></li>
+      <li id="user-info" style="display: none;">
+        <div style="display: flex; align-items: center; gap: 8px; max-width: 180px; overflow: hidden;">
+          <img id="user-photo" src="" alt="Profile" style="width: 28px; height: 28px; border-radius: 50%;" />
+          <span id="user-email" style="font-size: 0.85rem; color: #444; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"></span>
+        </div>
+      </li>
+      <li style="display: none;" id="myProductsBtn"><a href="yourproducts.html">My Products</a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <div class="hero-text">
+      <h1>Contact Us</h1>
+    </div>
+  </header>
+<!-- Keep everything the same until this section -->
+
+<!-- ✨ New Contact Information Section -->
+<section data-aos="fade-up">
+  <h2 class="section-title">Contact Information</h2>
+  <div class="features">
+    <div class="feature-card">
+      <h3>Our Address</h3>
+      <p>Kothamangalam, Kerala - 686691<br />LuxeLiving Interiors Showroom</p>
+    </div>
+    <div class="feature-card">
+      <h3>Phone</h3>
+      <p>+91 98765 43210<br />Mon - Sat, 10:00 AM - 7:00 PM</p>
+    </div>
+    <div class="feature-card">
+      <h3>Email</h3>
+      <p>support@luxeliving.in<br />We'll respond within 24 hours.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Follow Us</h3>
+      <p>
+        <a href="#">Instagram</a> | <a href="#">Facebook</a> | <a href="#">Pinterest</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+  <section data-aos="fade-up">
+  <h2 class="section-title">We’d Love to Hear From You</h2>
+  <form id="contact-form">
+    <input type="text" name="user_name" placeholder="Full Name" required />
+    <input type="email" name="user_email" placeholder="Email Address" required />
+    <input type="tel" name="user_phone" placeholder="Phone Number (Optional)" />
+    <textarea name="message" placeholder="Your Message" required></textarea>
+    <button type="submit">Send Message</button>
+    <p id="form-status" style="text-align:center; margin-top:15px; font-size:0.95rem;"></p>
+  </form>
+</section>
+
+  <footer>
+    &copy; 2025 LuxeLiving Interiors. All rights reserved.
+  </footer>
+<!-- EmailJS Script -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+  emailjs.init("Hcvq6oNPEpYMaBg_J"); // Replace with your own public key
+
+  document.getElementById("contact-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const form = this;
+    const statusText = document.getElementById("form-status");
+    statusText.textContent = "Sending...";
+    statusText.style.color = "#CBA135";
+
+    emailjs.sendForm("service_5d7cdhp", "template_4ciara9", form)
+      .then(() => {
+        statusText.textContent = "Message sent successfully!";
+        statusText.style.color = "green";
+        form.reset();
+      })
+      .catch((error) => {
+        statusText.textContent = "Failed to send. Please try again.";
+        statusText.style.color = "red";
+        console.error("EmailJS error:", error);
+      });
+  });
+</script>
+
+  <!-- Firebase Auth -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBGM4DkuRRLhL-RhXoNrgP2LUFQyNVCKDQ",
+      authDomain: "test-a21c6.firebaseapp.com",
+      projectId: "test-a21c6",
+      storageBucket: "test-a21c6.appspot.com",
+      messagingSenderId: "241202330354",
+      appId: "1:241202330354:web:47a72aaf3232005b592e6b"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    setPersistence(auth, browserLocalPersistence).then(() => {
+      onAuthStateChanged(auth, (user) => {
+        const authButtons = document.getElementById('auth-buttons');
+        const myProductsBtn = document.getElementById('myProductsBtn');
+        const userInfo = document.getElementById('user-info');
+        const userEmail = document.getElementById('user-email');
+        const userPhoto = document.getElementById('user-photo');
+
+        if (user) {
+          authButtons.style.display = 'none';
+          myProductsBtn.style.display = 'inline-block';
+          userInfo.style.display = 'flex';
+          userEmail.textContent = user.email || 'User';
+          userPhoto.src = user.photoURL || 'https://www.gravatar.com/avatar?d=mp&s=200';
+        } else {
+          authButtons.style.display = 'inline-block';
+          myProductsBtn.style.display = 'none';
+          userInfo.style.display = 'none';
+        }
+      });
+    });
+  </script>
+
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 800, once: true });
+    function toggleMenu(icon) {
+      icon.classList.toggle("active");
+      document.getElementById("nav-links").classList.toggle("show");
+    }
+  </script>
+</body>
+</html>

@@ -4,106 +4,179 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LuxeLiving Login</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
+    * { box-sizing: border-box; }
     body {
       font-family: 'Inter', sans-serif;
-      background: #f3f3f3;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
+      margin: 0; padding: 0;
+      background: linear-gradient(135deg, #ececec, #ffffff);
+      height: 100vh; display: flex;
+      justify-content: center; align-items: center;
+      background-image: url('https://images.unsplash.com/photo-1598300056313-6fa9c16c1d36');
+      background-size: cover; background-position: center;
+      backdrop-filter: blur(3px);
     }
     .container {
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-      max-width: 400px;
-      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 40px; border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      width: 100%; max-width: 400px; text-align: center;
     }
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
+    h2 { margin-bottom: 24px; font-weight: 600; color: #2e2e2e; }
+    input[type="email"], input[type="password"], input[type="text"] {
+      width: 100%; padding: 14px; margin-bottom: 10px;
+      border-radius: 8px; border: 1px solid #ccc;
+      font-size: 16px;
     }
-    input {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 15px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
+    .input-group { position: relative; }
+    .toggle-eye {
+      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+      cursor: pointer; font-size: 14px;
     }
+    .error-text { font-size: 12px; color: red; text-align: left; margin-top: -8px; margin-bottom: 10px; display: none; }
     button {
-      width: 100%;
-      padding: 12px;
-      background: #CBA135;
-      color: white;
-      font-weight: bold;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
+      width: 100%; padding: 14px; background: #CBA135;
+      color: white; font-size: 16px; font-weight: 600;
+      border: none; border-radius: 8px; cursor: pointer;
     }
-    button:hover {
-      background: #a5852b;
+    button:hover { background: #a5852b; }
+    .toggle, .forgot {
+      margin-top: 10px; color: #555; font-size: 14px;
+      cursor: pointer; text-align: center;
     }
-    .toggle {
-      margin-top: 15px;
-      text-align: center;
-      color: #666;
-      cursor: pointer;
+    .toggle:hover, .forgot:hover { color: #000; }
+    .message {
+      margin-top: 10px; padding: 10px;
+      border-radius: 6px; font-size: 14px;
+    }
+    .success { background-color: #e6f5ea; color: #2e7d32; border: 1px solid #a5d6a7; }
+    .error { background-color: #fdecea; color: #c62828; border: 1px solid #f44336; }
+    .remember {
+      display: flex; align-items: center; font-size: 14px; margin-bottom: 10px;
+      justify-content: flex-start; gap: 8px;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <h2 id="form-title">Login</h2>
-    <input type="text" id="name" placeholder="Full Name (Register only)" style="display:none">
-    <input type="email" id="email" placeholder="Email">
-    <input type="password" id="password" placeholder="Password">
+    <input type="text" id="name" placeholder="Full Name (Register only)" style="display:none" />
+    <div class="input-group">
+      <input type="email" id="email" placeholder="Email" />
+      <div class="error-text" id="email-error">Enter a valid email</div>
+    </div>
+    <div class="input-group">
+      <input type="password" id="password" placeholder="Password" />
+      <span class="toggle-eye" onclick="togglePassword('password')">👁️</span>
+      <div class="error-text" id="password-error">Password must be 6+ characters</div>
+    </div>
+    <div class="input-group" id="confirm-group" style="display:none">
+      <input type="password" id="confirm-password" placeholder="Confirm Password" />
+      <span class="toggle-eye" onclick="togglePassword('confirm-password')">👁️</span>
+      <div class="error-text" id="confirm-error">Passwords do not match</div>
+    </div>
+    <div class="remember">
+      <input type="checkbox" id="remember" checked> <label for="remember">Remember Me</label>
+    </div>
     <button onclick="submitForm()" id="form-btn">Login</button>
+    <div class="forgot" onclick="forgotPassword()">Forgot Password?</div>
+    <div class="message" id="message"></div>
     <div class="toggle" onclick="toggleForm()">Don't have an account? Register</div>
   </div>
 
-  <script>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBGM4DkuRRLhL-RhXoNrgP2LUFQyNVCKDQ",
+      authDomain: "test-a21c6.firebaseapp.com",
+      projectId: "test-a21c6",
+      storageBucket: "test-a21c6.appspot.com",
+      messagingSenderId: "241202330354",
+      appId: "1:241202330354:web:47a72aaf3232005b592e6b"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
     let isLogin = true;
 
-    function toggleForm() {
+    const emailEl = document.getElementById("email");
+    const passwordEl = document.getElementById("password");
+    const nameEl = document.getElementById("name");
+    const confirmPasswordEl = document.getElementById("confirm-password");
+    const messageEl = document.getElementById("message");
+
+    window.toggleForm = () => {
       isLogin = !isLogin;
       document.getElementById("form-title").innerText = isLogin ? "Login" : "Register";
       document.getElementById("form-btn").innerText = isLogin ? "Login" : "Register";
       document.getElementById("name").style.display = isLogin ? "none" : "block";
-      document.querySelector(".toggle").innerText = isLogin ? "Don't have an account? Register" : "Already have an account? Login";
-    }
+      document.getElementById("confirm-group").style.display = isLogin ? "none" : "block";
+      messageEl.innerText = "";
+    };
 
-    async function submitForm() {
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      const url = isLogin ? '/login' : '/register';
+    window.submitForm = async () => {
+      const email = emailEl.value.trim();
+      const password = passwordEl.value;
+      const confirm = confirmPasswordEl.value;
+      const name = nameEl.value.trim();
 
-      const body = isLogin ? { email, password } : { name, email, password };
+      clearErrors();
 
-      const res = await fetch(`http://localhost:5000${url}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
-      });
+      if (!email.includes("@")) showError("email-error");
+      if (password.length < 6) showError("password-error");
+      if (!isLogin && confirm !== password) showError("confirm-error");
 
-      const data = await res.json();
-      if (res.ok) {
+      if (document.querySelectorAll(".error-text:visible").length > 0) return;
+
+      try {
         if (isLogin) {
-          localStorage.setItem('token', data.token);
-          alert("Login successful!");
-          window.location.href = "your-products.html";
+          await setPersistence(auth, browserLocalPersistence);
+          const userCred = await signInWithEmailAndPassword(auth, email, password);
+          messageEl.className = "message success";
+          messageEl.innerText = `Welcome back, ${userCred.user.email}`;
+          setTimeout(() => window.location.href = "home.html", 2000);
         } else {
-          alert("Registered successfully! You can login now.");
+          await createUserWithEmailAndPassword(auth, email, password);
+          messageEl.className = "message success";
+          messageEl.innerText = "Registration successful! Please login now.";
           toggleForm();
         }
-      } else {
-        alert("Error: " + (data.message || "Something went wrong"));
+      } catch (err) {
+        messageEl.className = "message error";
+        messageEl.innerText = "❌ " + err.message;
       }
+    };
+
+    window.togglePassword = (id) => {
+      const field = document.getElementById(id);
+      field.type = field.type === "password" ? "text" : "password";
+    };
+
+    window.forgotPassword = async () => {
+      const email = emailEl.value;
+      if (!email.includes("@")) {
+        messageEl.className = "message error";
+        messageEl.innerText = "Please enter a valid email to reset password.";
+        return;
+      }
+      try {
+        await sendPasswordResetEmail(auth, email);
+        messageEl.className = "message success";
+        messageEl.innerText = "Password reset link sent to your email.";
+      } catch (err) {
+        messageEl.className = "message error";
+        messageEl.innerText = "❌ " + err.message;
+      }
+    };
+
+    function showError(id) {
+      document.getElementById(id).style.display = 'block';
+    }
+    function clearErrors() {
+      document.querySelectorAll(".error-text").forEach(el => el.style.display = "none");
     }
   </script>
 </body>
