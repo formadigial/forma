@@ -30,7 +30,7 @@
       --accent-color: #CBA135;
       --bg-color: #fdfdfd;
       --text-color: #2b2b2b;
-      --text-light: #666;
+      --text-light: #ffffff;
     }
 
     * {
@@ -222,23 +222,18 @@ body.menu-open #mobile-nav-overlay {
 .hero-background {
   position: absolute;
   inset: 0;
-  background: 
-    linear-gradient(135deg, #dad9d9, #a2a2a2, #666666),
-    url("https://www.transparenttextures.com/patterns/brushed-alum.png");
+  background: url("images/bg.jpg");
   background-blend-mode: overlay;
-  background-size: cover, 400px;
-  animation: backgroundFlow 14s ease infinite;
+  background-size: cover;
   z-index: 0;
   filter: brightness(1.15) contrast(1.05) saturate(1.1);
 }
 
-/* Add a premium noise texture overlay */
 .hero-background::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: 
-    url("https://www.transparenttextures.com/patterns/fabric-of-squares.png");
+  background: url('images/bg.jpg'); /* Check this path */
   opacity: 0.07;
   background-size: 300px;
   z-index: 1;
@@ -246,46 +241,12 @@ body.menu-open #mobile-nav-overlay {
   mix-blend-mode: soft-light;
 }
 
-/* Add elegant light spotlight overlay */
 .hero-background::after {
   content: "";
   position: absolute;
   inset: 0;
   background: radial-gradient(ellipse at center, rgba(255,255,255,0.2), rgba(0,0,0,0.05));
   z-index: 2;
-  pointer-events: none;
-
-}
-
-/* Extra glassy animated overlay */
-.hero-shimmer {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    115deg,
-    rgba(255, 255, 255, 0.1) 0%,
-    rgba(255, 255, 255, 0.05) 50%,
-    rgba(255, 255, 255, 0.1) 100%
-  );
-  background-size: 300% 300%;
-  animation: shimmerFlow 20s linear infinite;
-  z-index: 3;
-  pointer-events: none;
-  mix-blend-mode: lighten;
-}
-
-
-@keyframes shimmerFlow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(45deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 100%);
-  z-index: 1;
   pointer-events: none;
 }
 
@@ -316,7 +277,7 @@ body.menu-open #mobile-nav-overlay {
   padding: 12px 28px;
   border-radius: 50px;
   border: 1px solid rgb(101, 112, 104);
-  color: rgb(140, 138, 147);
+  color: rgb(23, 23, 23);
   font-weight: 600;
   transition: 0.3s;
   backdrop-filter: blur(4px);
@@ -339,13 +300,9 @@ body.menu-open #mobile-nav-overlay {
   max-width: 900px;
   margin-bottom: 160px;
   object-fit: contain;
-  animation: float 8s ease-in-out infinite;
+
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
 
 
 @media (max-width: 768px) {
@@ -415,15 +372,9 @@ body.menu-open #mobile-nav-overlay {
   backdrop-filter: blur(18px);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
-  transform-style: preserve-3d;
+ 
   will-change: transform;
   cursor: pointer;
-}
-
-.category-card:hover {
-  transform: translateY(-10px) scale(1.015);
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
-  border: 1px solid var(--accent-color);
 }
 
 
@@ -519,7 +470,7 @@ body.menu-open #mobile-nav-overlay {
 
 /* Hover overlay icon */
 .category-card::after {
-  content: "\f06e"; /* FontAwesome eye icon */
+ 
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
   position: absolute;
@@ -528,7 +479,7 @@ body.menu-open #mobile-nav-overlay {
   font-size: 1.4rem;
   color: rgba(255, 255, 255, 0.7);
   opacity: 0;
-  transition: opacity 0.4s ease;
+ 
   pointer-events: none;
 }
 
@@ -537,21 +488,8 @@ body.menu-open #mobile-nav-overlay {
 }
 
 /* Particle sparkle background (optional) */
-.browse-categories::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: url('https://www.transparenttextures.com/patterns/stardust.png');
-  opacity: 0.05;
-  pointer-events: none;
-  z-index: 1;
-}
 
-@keyframes shimmer {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+
 
 
 
@@ -974,7 +912,7 @@ body.menu-open #mobile-nav-overlay {
 }
 
 .feature-glass-card:hover {
-  transform: translateY(-10px);
+ 
   box-shadow: 0 20px 50px rgba(0,0,0,0.1);
   border-color: rgba(255, 215, 90, 0.5);
 }
@@ -987,8 +925,6 @@ body.menu-open #mobile-nav-overlay {
   width: 200%;
   height: 200%;
   background: radial-gradient(circle, rgba(255,215,90,0.05), transparent 70%);
-  transform: rotate(45deg);
-  animation: sparkleRotate 16s linear infinite;
   z-index: 1;
 }
 
@@ -1002,7 +938,6 @@ body.menu-open #mobile-nav-overlay {
   color: var(--accent-color);
   margin-bottom: 20px;
   z-index: 2;
-  transition: transform 0.3s ease;
 }
 
 .feature-glass-card:hover .icon-wrap {
@@ -1482,7 +1417,7 @@ body.menu-open #mobile-nav-overlay {
 
     </a>
 
-    <a href="bedroom.html" class="category-card" data-aos="zoom-in" data-aos-delay="100">
+    <a href="bedroom.html" class="category-card" >
       <div class="category-image" style="background-image: url('images/bedroom.jpg');"></div>
       <div class="category-info">
         <h3>Bedroom Series</h3>
@@ -1490,7 +1425,7 @@ body.menu-open #mobile-nav-overlay {
       </div>
     </a>
 
-    <a href="dining.html" class="category-card" data-aos="zoom-in" data-aos-delay="100">
+    <a href="dining.html" class="category-card" >
       <div class="category-image" style="background-image: url('images/dining.jpg');"></div>
       <div class="category-info">
         <h3>Dining Series</h3>
@@ -1498,7 +1433,7 @@ body.menu-open #mobile-nav-overlay {
       </div>
     </a>
 
-    <a href="storage.html" class="category-card" data-aos="zoom-in" data-aos-delay="100">
+    <a href="storage.html" class="category-card" >
       <div class="category-image" style="background-image: url('images/storage.webp');"></div>
       <div class="category-info">
         <h3>Storage Series</h3>
@@ -1506,7 +1441,7 @@ body.menu-open #mobile-nav-overlay {
       </div>
     </a>
 
-    <a href="interiors.html" class="category-card" data-aos="zoom-in" data-aos-delay="100">
+    <a href="interiors.html" class="category-card" >
       <div class="category-image" style="background-image: url('images/interior.jpg');"></div>
       <div class="category-info">
         <h3>Interior Decor</h3>
