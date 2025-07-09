@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Living Series | Rayyans Wood Park</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Inter&display=swap" rel="stylesheet">
-  <!-- Fonts -->
+ <!-- Fonts -->
    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;600&display=swap" rel="stylesheet">
  <!--  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Inter&display=swap" rel="stylesheet">
 
@@ -45,7 +45,7 @@
       color: inherit;
     }
 
-    
+
 
   nav {
   position: fixed;
@@ -380,9 +380,6 @@ body.menu-open #mobile-nav-overlay {
 </style>
 
 </head>
-<body>
-
-
 
 <nav>
   <div class="logo">RAYYANS WOOD PARK</div>
@@ -391,6 +388,9 @@ body.menu-open #mobile-nav-overlay {
     <span></span>
     <span></span>
   </div>
+
+
+<body>
   <ul id="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="collection.html">Collection</a></li>
@@ -413,10 +413,8 @@ body.menu-open #mobile-nav-overlay {
 </nav>
 
 
-
-
   <header>
-    <h1 class="section-title">Living Series</h1>
+    <h1 class="section-title">Bedroom Series</h1>
     <p class="subtitle">A curated collection of timeless design and craftsmanship</p>
   </header>
 
@@ -424,24 +422,12 @@ body.menu-open #mobile-nav-overlay {
 
   <script>
     const products = [
-      { name: "Royal Teal Sofa", image: "images/sofa1.png", tag: "Best Seller" },
-      { name: "Classic Beige Sofa", image: "images/sofa2.png", tag: "" },
-      { name: "Vintage Wood Armchair", image: "images/sofa3.png", tag: "" },
-      { name: "Luxury Sectional Sofa", image: "images/sofa4.png", tag: "" },
-      { name: "Ocean Blue Comfort Sofa", image: "images/sofa5.png", tag: "" },
-      { name: "Carved Timber Couch", image: "images/sofa6.png", tag: "" },
-      { name: "Red Velvet Studio Sofa", image: "images/sofa7.png", tag: "" },
-      { name: "Modern Living Recliner", image: "images/sofa12.png", tag: "" },
-      { name: "Soft Linen Recliner", image: "images/sofa11.png", tag: "" },
-      { name: "Grey Plush Chair", image: "images/sofa13.png", tag: "" },
-      { name: "Green Accent Chair", image: "images/chair1.png", tag: "" },
-      { name: "Minimalist Oak Chair", image: "images/chair2.png", tag: "" },
-      { name: "Premium Leather Recliner", image: "images/chair3.png", tag: "" },
-   
+      { name: "Warm Oak Platform Bed", image: "images/bed1.png", tag: "Best Seller" },
     ];
 
     const list = document.getElementById("productList");
 
+    // Add existing products
     products.forEach(product => {
       list.innerHTML += `
         <div class="product-card">
@@ -451,6 +437,15 @@ body.menu-open #mobile-nav-overlay {
         </div>
       `;
     });
+
+    // Add 4 premium coming soon placeholders
+    for (let i = 0; i < 5; i++) {
+      list.innerHTML += `
+        <div class="product-card coming-soon">
+          <span>Coming Soon</span>
+        </div>
+      `;
+    }
 
 
     function toggleMenu(icon) {

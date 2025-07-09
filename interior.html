@@ -45,7 +45,12 @@
       color: inherit;
     }
 
-    
+  body {
+    background-color: var(--bg);
+    font-family: 'Inter', sans-serif;
+    color: var(--primary);
+  }
+
 
   nav {
   position: fixed;
@@ -382,8 +387,6 @@ body.menu-open #mobile-nav-overlay {
 </head>
 <body>
 
-
-
 <nav>
   <div class="logo">RAYYANS WOOD PARK</div>
   <div class="hamburger" onclick="toggleMenu(this)">
@@ -414,9 +417,8 @@ body.menu-open #mobile-nav-overlay {
 
 
 
-
   <header>
-    <h1 class="section-title">Living Series</h1>
+    <h1 class="section-title">Interior Series</h1>
     <p class="subtitle">A curated collection of timeless design and craftsmanship</p>
   </header>
 
@@ -424,19 +426,10 @@ body.menu-open #mobile-nav-overlay {
 
   <script>
     const products = [
-      { name: "Royal Teal Sofa", image: "images/sofa1.png", tag: "Best Seller" },
-      { name: "Classic Beige Sofa", image: "images/sofa2.png", tag: "" },
-      { name: "Vintage Wood Armchair", image: "images/sofa3.png", tag: "" },
-      { name: "Luxury Sectional Sofa", image: "images/sofa4.png", tag: "" },
-      { name: "Ocean Blue Comfort Sofa", image: "images/sofa5.png", tag: "" },
-      { name: "Carved Timber Couch", image: "images/sofa6.png", tag: "" },
-      { name: "Red Velvet Studio Sofa", image: "images/sofa7.png", tag: "" },
-      { name: "Modern Living Recliner", image: "images/sofa12.png", tag: "" },
-      { name: "Soft Linen Recliner", image: "images/sofa11.png", tag: "" },
-      { name: "Grey Plush Chair", image: "images/sofa13.png", tag: "" },
-      { name: "Green Accent Chair", image: "images/chair1.png", tag: "" },
+      { name: "Vintage Wood Cabinet 1", image: "images/cupboard1.jpg", tag: "Best Seller" },
+      { name: "Vintage Wood Cabinet 2", image: "images/cupboard2.jpg", tag: "" },
+      { name: "Marble Panel Wardrobe", image: "images/wardobe1.jpg", tag: "" },
       { name: "Minimalist Oak Chair", image: "images/chair2.png", tag: "" },
-      { name: "Premium Leather Recliner", image: "images/chair3.png", tag: "" },
    
     ];
 
@@ -452,6 +445,13 @@ body.menu-open #mobile-nav-overlay {
       `;
     });
 
+        for (let i = 0; i < 2; i++) {
+      list.innerHTML += `
+        <div class="product-card coming-soon">
+          <span>Coming Soon</span>
+        </div>
+      `;
+    }
 
     function toggleMenu(icon) {
   icon.classList.toggle("active");

@@ -3,16 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact Us | LuxeLiving Interiors</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Inter&display=swap" rel="stylesheet">
+  <title>Contact Us | Rayyans Wood Park</title>
+   <!-- Fonts -->
+   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+ <!--  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Inter&display=swap" rel="stylesheet">
+
+-->
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-y9Y+...snipped...Xw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- AOS Animation -->
   <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@next/dist/aos.js" defer></script>
+
   <style>
+
+
+
     :root {
       --primary-color: #2b2b2b;
       --accent-color: #CBA135;
-      --bg-light: #fdfdfd;
+      --bg-color: #fdfdfd;
       --text-color: #2b2b2b;
-      --text-light: #666;
+      --text-light: #ffffff;
     }
 
     * {
@@ -23,111 +37,168 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background-color: var(--bg-light);
+      background-color: var(--bg-color);
       color: var(--text-color);
+      scroll-behavior: smooth;
       line-height: 1.6;
     }
 
     a {
-      color: inherit;
       text-decoration: none;
+      color: inherit;
     }
 
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: white;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-      z-index: 999;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 30px;
-      font-family: 'Cormorant Garamond', serif;
-    }
+    
 
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-      gap: 5px;
-      z-index: 1001;
-    }
+/* === Premium NavBar Styling === */
+nav {
+  position: fixed;
+  width: 100%;
+  padding: 18px 30px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(18px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  transition: background 0.3s ease;
+  font-family: 'DM Serif Display', serif;
+}
 
-    .hamburger span {
-      height: 3px;
-      width: 25px;
-      background: var(--primary-color);
-      border-radius: 5px;
-      transition: 0.3s ease;
-    }
+.logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--primary-color);
+  transition: transform 0.3s ease;
+}
+.logo:hover {
+  transform: scale(1.05);
+}
 
-    .hamburger.active span:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
-    }
-    .hamburger.active span:nth-child(2) {
-      opacity: 0;
-    }
-    .hamburger.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(6px, -6px);
-    }
+#nav-links {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+}
+#nav-links li a {
+  position: relative;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  transition: color 0.3s ease;
+  padding: 6px 0;
+}
+#nav-links li a::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 3px;
+  background: var(--accent-color);
+  transition: width 0.4s ease;
+}
+#nav-links li a:hover {
+  color: var(--accent-color);
+}
+#nav-links li a:hover::before {
+  width: 100%;
+}
 
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 20px;
-    }
+/* Mobile hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  z-index: 1001;
+}
+.hamburger span {
+  height: 3px;
+  width: 24px;
+  background: var(--primary-color);
+  border-radius: 2px;
+  transition: all 0.4s ease;
+}
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 6px);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -6px);
+}
 
-    nav ul li a {
-      position: relative;
-      font-weight: 600;
-    }
+/* Mobile nav drawer */
+#mobile-nav-wrapper {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 260px;
+  height: 100vh;
+  background: white;
+  padding-top: 80px;
+  box-shadow: -2px 0 14px rgba(0, 0, 0, 0.1);
+  transition: right 0.4s ease;
+  z-index: 999;
+}
+#mobile-nav-wrapper.show {
+  right: 0;
+}
+#mobile-nav-wrapper ul {
+  display: flex;
+  flex-direction: column;
+  padding: 0 30px;
+  gap: 24px;
+}
+#mobile-nav-wrapper li a {
+  color: var(--primary-color);
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
 
-    nav ul li a::after {
-      content: "";
-      display: block;
-      height: 2px;
-      background: var(--accent-color);
-      width: 0;
-      transition: width 0.3s ease;
-    }
+/* Overlay */
+#mobile-nav-overlay {
+  display: none;
+}
+body.menu-open #mobile-nav-overlay {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 998;
+}
 
-    nav ul li a:hover::after {
-      width: 100%;
-    }
+/* Responsive */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+  #nav-links {
+    display: none;
+  }
+}
 
-    @media (max-width: 768px) {
-      .hamburger {
-        display: flex;
-      }
 
-      nav ul {
-        position: absolute;
-        top: 60px;
-        left: 0;
-        width: 100%;
-        background: white;
-        flex-direction: column;
-        display: none;
-        text-align: center;
-        padding: 20px 0;
-      }
-
-      nav ul.show {
-        display: flex;
-        animation: slideDown 0.3s ease forwards;
-      }
-
-      nav ul li {
-        padding: 12px 0;
-      }
-
+   
       @keyframes slideDown {
-        from { opacity: 0; transform: translateY(-10px); }
-        to { opacity: 1; transform: translateY(0); }
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
-    }
 
     header {
       background: url('https://images.unsplash.com/photo-1598300051331-761c7953a2bc') no-repeat center center/cover;
@@ -155,7 +226,7 @@
 
     .hero-text h1 {
       font-size: 3rem;
-      font-family: 'Cormorant Garamond', serif;
+     font-family: 'DM Serif Display', serif;
     }
 
     section {
@@ -165,7 +236,7 @@
     }
 
     .section-title {
-      font-family: 'Cormorant Garamond', serif;
+    font-family: 'DM Serif Display', serif;
       font-size: 2.2rem;
       text-align: center;
       margin-bottom: 40px;
@@ -230,31 +301,33 @@
 </head>
 <body>
 
-  <nav>
-    <div class="logo">RAYYANS WOOD PARK</div>
-    <div class="hamburger" onclick="toggleMenu(this)">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-    <ul id="nav-links">
-      <li><a href="home.html">Home</a></li>
-      <li><a href="products.html">Collection</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="materials.html">Materials</a></li>
-      <li><a href="gallery.html">Gallery</a></li>
-      
-      <li id="auth-buttons"><a href="login.html" id="loginBtn">Login</a></li>
-      <li id="user-info" style="display: none;">
-        <div style="display: flex; align-items: center; gap: 8px; max-width: 180px; overflow: hidden;">
-          <img id="user-photo" src="" alt="Profile" style="width: 28px; height: 28px; border-radius: 50%;" />
-          <span id="user-email" style="font-size: 0.85rem; color: #444; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"></span>
-        </div>
-      </li>
-      <li style="display: none;" id="myProductsBtn"><a href="yourproducts.html">My Products</a></li>
-    </ul>
-  </nav>
+ <nav>
+  <div class="logo">RAYYANS WOOD PARK</div>
+  <div class="hamburger" onclick="toggleMenu(this)">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <ul id="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="collection.html">Collection</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    
+  </ul>
 
+  <!-- Mobile Nav Drawer -->
+  <div id="mobile-nav-wrapper">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="collection.html">Collection</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      
+    </ul>
+  </div>
+  <div id="mobile-nav-overlay" onclick="closeMobileNav()"></div>
+</nav>
   <header>
     <div class="hero-text">
       <h1>Contact Us</h1>
@@ -268,21 +341,21 @@
   <div class="features">
     <div class="feature-card">
       <h3>Our Address</h3>
-      <p>Kothamangalam, Kerala - 686691<br />LuxeLiving Interiors Showroom</p>
+      <p>Kothamangalam, Kerala - 686691<br />Rayyans Wood Park</p>
     </div>
     <div class="feature-card">
       <h3>Phone</h3>
-      <p>+91 98765 43210<br />Mon - Sat, 10:00 AM - 7:00 PM</p>
+      <p>+91 9947710853<br />Mon - Sat, 8:00 AM - 9:00 PM</p>
     </div>
     <div class="feature-card">
-      <h3>Email</h3>
+     <!--   <h3>Email</h3>
       <p>support@luxeliving.in<br />We'll respond within 24 hours.</p>
-    </div>
+    </div>-->
     <div class="feature-card">
       <h3>Follow Us</h3>
-      <p>
+   <!--   <p>
         <a href="#">Instagram</a> | <a href="#">Facebook</a> | <a href="#">Pinterest</a>
-      </p>
+      </p>-->
     </div>
   </div>
 </section>
@@ -300,7 +373,7 @@
 </section>
 
   <footer>
-    &copy; 2025 LuxeLiving Interiors. All rights reserved.
+    &copy; 2025 RAYYANS WOOD PARK. All rights reserved.
   </footer>
 <!-- EmailJS Script -->
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
@@ -373,9 +446,17 @@
   <script>
     AOS.init({ duration: 800, once: true });
     function toggleMenu(icon) {
-      icon.classList.toggle("active");
-      document.getElementById("nav-links").classList.toggle("show");
-    }
+  icon.classList.toggle("active");
+  document.getElementById("mobile-nav-wrapper").classList.toggle("show");
+  document.body.classList.toggle("menu-open");
+}
+
+function closeMobileNav() {
+  document.querySelector('.hamburger').classList.remove("active");
+  document.getElementById("mobile-nav-wrapper").classList.remove("show");
+  document.body.classList.remove("menu-open");
+}
+
   </script>
 </body>
 </html>
