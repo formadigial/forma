@@ -1,0 +1,1804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Premium handcrafted furniture and home decor. Discover timeless living with LuxeLiving Interiors." />
+  <meta name="keywords" content="furniture, home decor, luxury interiors, handcrafted furniture, designer furniture, best furnitures, best furniture shop, best furniture shop in ernakulam, best furniture shop in nellikuzhi, best furniture store nellikuzhi , wooden furniture ernakulam , buy furniture in nellikuzhi, home furniture shop near me , sofa set nellikuzhi, rayyanswoodpark ernakulam , rayyanswoodpark nellikuzhi, furniture near kothamangalam, furniture delivery nellikuzhi, kerala furniture stor online , affordable furniture kerala" />
+  <meta name="author" content="Rayyans Wood Park" />
+  <title>Home | Rayyans Wood Park</title>
+
+  <!-- Fonts -->
+   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+ <!--  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Inter&display=swap" rel="stylesheet">
+
+-->
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-y9Y+...snipped...Xw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- AOS Animation -->
+  <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@next/dist/aos.js" defer></script>
+
+  <style>
+
+
+
+    :root {
+      --primary-color: #2b2b2b;
+      --accent-color: #CBA135;
+      --bg-color: #fdfdfd;
+      --text-color: #2b2b2b;
+      --text-light: #2c2c2c;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      scroll-behavior: smooth;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    
+
+/* === Premium NavBar Styling === */
+nav {
+  position: fixed;
+  width: 100%;
+  padding: 18px 30px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(18px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  transition: background 0.3s ease;
+  font-family: 'DM Serif Display', serif;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--primary-color);
+  transition: transform 0.3s ease;
+}
+.logo:hover {
+  transform: scale(1.05);
+}
+
+#nav-links {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+}
+#nav-links li a {
+  position: relative;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  transition: color 0.3s ease;
+  padding: 6px 0;
+}
+#nav-links li a::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 3px;
+  background: var(--accent-color);
+  transition: width 0.4s ease;
+}
+#nav-links li a:hover {
+  color: var(--accent-color);
+}
+#nav-links li a:hover::before {
+  width: 100%;
+}
+
+/* Mobile hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  z-index: 1001;
+}
+.hamburger span {
+  height: 3px;
+  width: 24px;
+  background: var(--primary-color);
+  border-radius: 2px;
+  transition: all 0.4s ease;
+}
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 6px);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -6px);
+}
+
+/* Mobile nav drawer */
+#mobile-nav-wrapper {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 260px;
+  height: 100vh;
+  background: white;
+  padding-top: 80px;
+  box-shadow: -2px 0 14px rgba(0, 0, 0, 0.1);
+  transition: right 0.4s ease;
+  z-index: 999;
+}
+#mobile-nav-wrapper.show {
+  right: 0;
+}
+#mobile-nav-wrapper ul {
+  display: flex;
+  flex-direction: column;
+  padding: 0 30px;
+  gap: 24px;
+}
+#mobile-nav-wrapper li a {
+  color: var(--primary-color);
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+/* Overlay */
+#mobile-nav-overlay {
+  display: none;
+}
+body.menu-open #mobile-nav-overlay {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 998;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+  #nav-links {
+    display: none;
+  }
+}
+
+
+   
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    
+    .hero-3d {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 80px;
+}
+@keyframes backgroundFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.hero-background {
+  position: absolute;
+  inset: 0;
+  background: url("images/bg.jpg");
+  background-blend-mode: overlay;
+  background-size: cover;
+  z-index: 0;
+  filter: brightness(1.15) contrast(1.05) saturate(1.1);
+}
+
+
+.hero-text-layer {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: var(--primary-color);
+  font-family: 'Cormorant Garamond', serif;
+  animation: slideDown 1s ease;
+}
+
+.hero-text-layer img {
+  height: 450px;
+  margin-bottom: 1px;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.hero-text-layer p {
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+  color: var(--text-light);
+}
+
+
+.hero-text-layer a {
+  padding: 12px 28px;
+  border-radius: 50px;
+  border: 1px solid rgb(101, 112, 104);
+  color: rgb(23, 23, 23);
+  font-weight: 600;
+  transition: 0.3s;
+  backdrop-filter: blur(4px);
+}
+
+.hero-text-layer a:hover {
+  background: white;
+  color: var(--primary-color);
+}
+
+
+
+
+@media (max-width: 768px) {
+  .hero-text-layer h1 {
+    font-size: 2rem;
+    white-space: nowrap;
+    margin-bottom: 70px;
+  }
+
+
+}
+
+
+
+    section {
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+.browse-categories {
+  position: relative;
+  padding: 120px 20px;
+  background: linear-gradient(135deg, #f5f2ed, #faf7f2);
+  overflow: hidden;
+}
+
+.browse-categories::before {
+  content: "";
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(255, 230, 185, 0.4), transparent 70%);
+  z-index: 0;
+  filter: blur(60px);
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 40px;
+  max-width: 1200px;
+  margin: auto;
+  position: relative;
+  z-index: 2;
+}
+
+.category-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(18px);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+ 
+  will-change: transform;
+  cursor: pointer;
+}
+
+
+.image-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Only the image zooms */
+.category-image {
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  transition: transform 1s ease;
+}
+
+.category-card:hover .category-image {
+  transform: scale(1.05);
+}
+
+/* The ribbon stays fixed */
+.ribbon-gold {
+  position: absolute;
+  top: 16px;
+  left: -42px;
+  z-index: 5;
+  transform: rotate(-45deg);
+  font-size: 0.72rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #fff;
+  padding: 6px 0;
+  width: 160px;
+  text-align: center;
+  border-radius: 4px;
+  background: linear-gradient(135deg, #d4af37, #fff4b0, #d4af37);
+  background-size: 400% 400%;
+  animation: ribbonGlow 4s ease infinite, sparkleFlash 1.8s infinite ease-in-out;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+.ribbon-gold::after {
+  content: "";
+  position: absolute;
+  top: -20%;
+  left: -30%;
+  width: 160%;
+  height: 160%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, transparent 60%);
+  animation: sparkleFlash 2.8s infinite ease-in-out;
+  pointer-events: none;
+  opacity: 0.2;
+  z-index: 1;
+  mix-blend-mode: screen;
+}
+
+
+.ribbon-gold::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(255,255,255,0.6) 0%, transparent 60%);
+  animation: ribbonShine 2.5s infinite ease-in-out;
+}
+
+@keyframes ribbonShine {
+  0% { left: -100%; }
+  50% { left: 100%; }
+  100% { left: 100%; }
+}
+
+.category-info {
+  padding: 30px;
+  text-align: center;
+  transition: all 0.4s ease;
+}
+
+.category-info h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.6rem;
+  color: #2b2b2b;
+  margin-bottom: 8px;
+}
+
+.category-info p {
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Hover overlay icon */
+.category-card::after {
+ 
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  font-size: 1.4rem;
+  color: rgba(255, 255, 255, 0.7);
+  opacity: 0;
+ 
+  pointer-events: none;
+}
+
+.category-card:hover::after {
+  opacity: 1;
+}
+
+/* Particle sparkle background (optional) */
+
+
+
+
+
+.whatsapp-float {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  z-index: 999;
+  text-decoration: none;
+}
+
+.whatsapp-circle {
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.whatsapp-circle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+}
+
+.chat-tooltip {
+  position: absolute;
+  right: 70px;
+  background: #128C7E;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: translateX(10px);
+}
+
+.whatsapp-circle:hover .chat-tooltip {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+
+
+.footer-modern {
+  background: linear-gradient(145deg, #2b2b2b, #1f1f1f);
+  color: #eee;
+  padding: 80px 20px 40px;
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.footer-modern::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url('https://www.transparenttextures.com/patterns/white-wall-3.png');
+  opacity: 0.03;
+  z-index: 0;
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  margin: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-logo h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.8rem;
+  color: var(--accent-color);
+  margin-bottom: 10px;
+}
+
+.footer-logo p {
+  font-size: 0.95rem;
+  color: #aaa;
+  margin-bottom: 40px;
+  max-width: 500px;
+}
+
+.footer-columns {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.footer-column {
+  flex: 1 1 200px;
+}
+
+.footer-column h3 {
+  font-size: 1.1rem;
+  color: var(--accent-color);
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 12px;
+}
+
+.footer-column ul li a {
+  color: #ccc;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
+}
+
+.footer-column ul li a:hover {
+  color: var(--accent-color);
+}
+
+.contact-info li i {
+  margin-right: 10px;
+  color: var(--accent-color);
+}
+
+.footer-bottom {
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 20px;
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-top: 60px;
+}
+
+@media (max-width: 768px) {
+  .footer-columns {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .footer-logo {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .footer-logo h2 {
+    font-size: 1.5rem;
+  }
+
+  .footer-column {
+    text-align: center;
+  }
+}
+
+.footer-map-embed iframe {
+  width: 100%;
+  height: 180px;
+  border-radius: 10px;
+  border: none;
+  filter: grayscale(0.2) brightness(0.9) contrast(1.1);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+@media (max-width: 768px) {
+  .footer-map-embed iframe {
+    height: 220px;
+    margin-top: 10px;
+  }
+}
+
+
+
+    @media (max-width: 768px) {
+      .footer-container {
+        flex-direction: column;
+      }
+    }
+
+.elegant-intro {
+  background: linear-gradient(135deg, #f5f4f1, #fbf9f6);
+  padding: 100px 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.elegant-wrapper {
+  max-width: 1200px;
+  margin: auto;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.elegant-title {
+  font-size: 2.6rem;
+  font-family: 'DM Serif Display', serif;
+  color: var(--primary-color);
+}
+
+.section-divider {
+  width: 80px;
+  height: 4px;
+  background: var(--accent-color);
+  margin: 20px auto;
+  border-radius: 6px;
+  animation: shimmerDivider 3s linear infinite;
+}
+
+@keyframes shimmerDivider {
+  0% { box-shadow: 0 0 0px var(--accent-color); }
+  50% { box-shadow: 0 0 10px var(--accent-color); }
+  100% { box-shadow: 0 0 0px var(--accent-color); }
+}
+
+.elegant-subtext {
+  max-width: 720px;
+  margin: 20px auto 60px;
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.7;
+}
+
+.elegant-showcase {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.elegant-card {
+  width: 300px;
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 20px;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.elegant-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+}
+
+.elegant-card-overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 20px;
+  background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.6) 100%);
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-align: center;
+  backdrop-filter: blur(4px);
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.elegant-flagship {
+  position: relative;
+  background: linear-gradient(135deg, #f7f5f0, #fefcfb);
+  padding: 120px 20px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.flagship-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 3rem;
+  color: var(--primary-color);
+  text-align: center;
+}
+
+.section-divider {
+  width: 80px;
+  height: 4px;
+  margin: 20px auto;
+  background: var(--accent-color);
+  border-radius: 50px;
+  animation: shimmerDivider 2s infinite linear;
+}
+
+.flagship-subtext {
+  font-size: 1.15rem;
+  max-width: 780px;
+  margin: 20px auto 60px;
+  text-align: center;
+  color: #5c5c5c;
+}
+
+.flagship-showcase {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  position: relative;
+  z-index: 2;
+}
+
+.flagship-card {
+  width: 320px;
+  height: 460px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 22px;
+  position: relative;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  overflow: hidden;
+}
+
+.flagship-card:hover {
+  transform: translateY(-12px) scale(1.015);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.15);
+}
+
+.badge-glass {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(255,255,255,0.25);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #222;
+  padding: 8px 20px;
+  font-weight: 600;
+  border-radius: 40px;
+  backdrop-filter: blur(10px);
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Sparkle Canvas */
+
+@media (max-width: 768px) {
+  .flagship-card {
+    width: 90%;
+    height: 380px;
+  }
+
+  .flagship-title {
+    font-size: 2rem;
+  }
+}
+
+
+
+.why-choose-us {
+  background: linear-gradient(to bottom, #fffefc, #f9f4e7);
+  padding: 100px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.features-glass-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 40px;
+  max-width: 1200px;
+  margin: auto;
+  padding-top: 40px;
+  position: relative;
+  z-index: 2;
+}
+
+.feature-glass-card {
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 20px;
+  padding: 40px 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  border: 1px solid rgba(255, 215, 90, 0.3);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.feature-glass-card:hover {
+ 
+  box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+  border-color: rgba(255, 215, 90, 0.5);
+}
+
+.feature-glass-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,215,90,0.05), transparent 70%);
+  z-index: 1;
+}
+
+
+.icon-wrap {
+  font-size: 38px;
+  color: var(--accent-color);
+  margin-bottom: 20px;
+  z-index: 2;
+}
+
+.feature-glass-card h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.4rem;
+  margin-bottom: 14px;
+  color: #2b2b2b;
+  position: relative;
+  z-index: 2;
+}
+
+.feature-glass-card p {
+  font-size: 0.95rem;
+  color: #555;
+  z-index: 2;
+  position: relative;
+  line-height: 1.6;
+}
+
+
+
+.sparkle-background {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+
+
+
+.testimonial-section {
+  position: relative;
+  background: #fefefe;
+  padding: 100px 20px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.testimonial-section .section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 60px;
+  position: relative;
+  z-index: 2;
+}
+
+.testimonial-bg-sparkles {
+  position: absolute;
+  inset: 0;
+  background: url("https://www.transparenttextures.com/patterns/stardust.png");
+  background-size: 250px;
+  opacity: 0.06;
+  z-index: 1;
+  animation: sparkleBG 60s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes sparkleBG {
+  0% { background-position: 0 0; }
+  100% { background-position: 1000px 1000px; }
+}
+
+/* Carousel Layout */
+/* ==== DESKTOP TESTIMONIAL CAROUSEL ==== */
+.desktop-testimonials {
+  display: block;
+}
+.mobile-testimonials {
+  display: none;
+}
+
+.testimonial-carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  max-width: 1200px;
+  margin: 40px auto 0;
+  padding: 0 40px;
+  overflow: hidden;
+}
+
+.testimonial-track-wrapper {
+  overflow: hidden;
+  width: 100%;
+}
+
+.testimonial-track {
+  display: flex;
+  gap: 30px;
+  transition: transform 0.6s ease-in-out;
+}
+
+.testimonial-card {
+  flex: 0 0 320px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  padding: 24px;
+  position: relative;
+  transition: transform 0.4s ease;
+  text-align: center;
+}
+.testimonial-card:hover {
+  transform: translateY(-8px);
+}
+.testimonial-text {
+  font-style: italic;
+  font-size: 1.05rem;
+  color: #444;
+  margin-bottom: 20px;
+}
+.testimonial-rating {
+  font-size: 1.4rem;
+  color: #d4af37;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+.testimonial-author {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #222;
+}
+
+/* ==== NAVIGATION BUTTONS ==== */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: white;
+  border: none;
+  font-size: 1.4rem;
+  color: #333;
+  padding: 12px;
+  border-radius: 50%;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.carousel-btn:hover {
+  background: #f0f0f0;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-btn.left {
+  left: -10px;
+}
+
+.carousel-btn.right {
+  right: -10px;
+}
+
+/* ==== MOBILE STYLES ==== */
+@media (max-width: 768px) {
+  .desktop-testimonials {
+    display: none;
+  }
+  .mobile-testimonials {
+    display: block;
+    padding: 1rem;
+  }
+
+  .mobile-testimonial-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .mobile-testimonial-card {
+    background: #fff;
+    border-radius: 1rem;
+    padding: 1.2rem 1.4rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    animation: fadeInUp 0.6s ease forwards;
+    text-align: center;
+  }
+
+  .mobile-testimonial-card p {
+    font-style: italic;
+    font-size: 1rem;
+    color: #444;
+  }
+
+  .mobile-testimonial-card h4 {
+    margin-top: 8px;
+    font-weight: 600;
+    color: #222;
+    font-size: 1rem;
+  }
+
+  .testimonial-rating {
+    color: #d4af37;
+    font-size: 1.2rem;
+    margin: 6px 0;
+    letter-spacing: 1px;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+
+
+
+.signature-design-elements {
+  background: linear-gradient(to bottom, #fffef9, #f7f3ea);
+  padding: 100px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.design-section-wrapper {
+  max-width: 1200px;
+  margin: auto;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.design-subtext {
+  font-size: 1.1rem;
+  color: #555;
+  max-width: 740px;
+  margin: 0 auto 60px;
+  line-height: 1.6;
+}
+
+.design-features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+}
+
+.design-feature-card {
+  perspective: 1000px;
+}
+
+.card-glass {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+  transition: transform 0.5s ease, box-shadow 0.4s ease;
+  transform-style: preserve-3d;
+  text-align: left;
+}
+
+.design-feature-card:hover .card-glass {
+  transform: rotateX(6deg) rotateY(-6deg) scale(1.02);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.1);
+}
+
+.card-glass img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 14px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+
+.card-glass h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.3rem;
+  color: #2b2b2b;
+  margin-bottom: 10px;
+}
+
+.card-glass p {
+  font-size: 0.96rem;
+  color: #666;
+  line-height: 1.5;
+}
+
+
+
+@media (max-width: 768px) {
+  .card-glass {
+    transform: none !important;
+  }
+
+  .design-subtext {
+    font-size: 0.95rem;
+  }
+
+  .card-glass img {
+    height: 160px;
+  }
+}
+
+
+
+
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">RAYYANS WOOD PARK</div>
+  <div class="hamburger" onclick="toggleMenu(this)">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <ul id="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="collection.html">Collection</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+     
+  </ul>
+
+  <!-- Mobile Nav Drawer -->
+  <div id="mobile-nav-wrapper">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="collection.html">Collection</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      
+    </ul>
+  </div>
+  <div id="mobile-nav-overlay" onclick="closeMobileNav()"></div>
+</nav>
+
+
+<header class="hero-3d">
+  <div class="hero-background"></div>
+<div class="hero-overlay"></div>
+<div class="hero-shimmer"></div>
+
+  <div class="hero-text-layer">
+   <img src="images/logo.png">
+    <p id="typewriter"></p>
+    <a href="products.html">Explore Collection</a>
+  </div>
+
+
+</header>
+
+
+
+
+
+<a href="https://wa.me/99947710853" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+  <div class="whatsapp-circle">
+    <i class="fab fa-whatsapp"></i>
+    <span class="chat-tooltip">Chat with us</span>
+  </div>
+</a>
+
+
+
+
+<section class="browse-categories" data-aos="fade-up">
+  <h2 class="section-title">Browse by Category</h2>
+  <div class="category-grid">
+<a href="living.html" class="category-link">
+  <div class="category-card">
+    <div class="image-wrapper">
+      <div class="category-image" style="background-image: url('images/sofa2.PNG');"></div>
+      <div class="ribbon-gold">Bestseller</div>
+    </div>
+    <div class="category-info">
+      <h3>Living Series</h3>
+      <p>Beautiful living room pieces that speak your style.</p>
+    </div>
+  </div>
+</a>
+
+
+    <a href="bedroom.html" class="category-card" >
+      <div class="category-image" style="background-image: url('images/bed1.png');"></div>
+      <div class="category-info">
+        <h3>Bedroom Series</h3>
+        <p>Comfort and elegance for your peaceful retreat.</p>
+      </div>
+    </a>
+
+    <a href="dining.html" class="category-card" >
+      <div class="category-image" style="background-image: url('images/table1.jpg');"></div>
+      <div class="category-info">
+        <h3>Dining Series</h3>
+        <p>Gather round for sophisticated dining experiences.</p>
+      </div>
+    </a>
+
+    <a href="interiors.html" class="category-card" >
+      <div class="category-image" style="background-image: url('images/cupboard1.jpg');"></div>
+      <div class="category-info">
+        <h3>Interior Decor</h3>
+        <p>Curated decor accents to bring warmth and style.</p>
+      </div>
+    </a>
+  </div>
+</section>
+
+
+<script>
+  AOS.init({ duration: 800, once: true });
+</script>
+
+
+<section class="elegant-flagship" data-aos="fade-up">
+  <div class="elegant-wrapper">
+    <h2 class="section-title flagship-title">Elegant Spaces Start Here</h2>
+    <div class="section-divider"></div>
+    <p class="flagship-subtext">
+      Experience elegance reimagined — where each piece is designed not just to fill a space, but to inspire it.
+    </p>
+
+    <div class="flagship-showcase">
+      <div class="flagship-card" style="background-image: url('images/sofa1.PNG');">
+        <span class="badge-glass">Living</span>
+      </div>
+      <div class="flagship-card" style="background-image: url('images/table2.jpg');">
+        <span class="badge-glass">Dining</span>
+      </div>
+      <div class="flagship-card" style="background-image: url('images/bed1.png');">
+        <span class="badge-glass">Bedroom</span>
+      </div>
+    </div>
+
+    <canvas id="sparkleCanvas"></canvas>
+  </div>
+</section>
+<script>
+  // Parallax tilt effect
+  document.querySelectorAll('.flagship-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      card.style.transform = `rotateX(${-y / 30}deg) rotateY(${x / 30}deg) scale(1.015)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = `rotateX(0deg) rotateY(0deg) scale(1)`;
+    });
+  });
+
+
+</script>
+
+
+
+
+<section class="why-choose-us" data-aos="fade-up">
+    <div class="sparkle-background"></div>
+
+  <h2 class="section-title">Why Choose Rayyans Wood Park</h2>
+  <div class="features-glass-grid">
+    <div class="feature-glass-card">
+      <div class="icon-wrap"><i class="fas fa-couch"></i></div>
+      <h3>Handcrafted Excellence</h3>
+      <p>Each piece is artisan-crafted with attention to every curve and finish.</p>
+    </div>
+    <div class="feature-glass-card">
+      <div class="icon-wrap"><i class="fas fa-leaf"></i></div>
+      <h3>Eco-Conscious Materials</h3>
+      <p>Sustainably sourced wood and finishes with low environmental impact.</p>
+    </div>
+    <div class="feature-glass-card">
+      <div class="icon-wrap"><i class="fas fa-shipping-fast"></i></div>
+      <h3>Nationwide Delivery</h3>
+      <p>Safe, fast delivery across India with trusted logistic partners.</p>
+    </div>
+    <!--
+    <div class="feature-glass-card">
+      <div class="icon-wrap"><i class="fas fa-star"></i></div>
+      <h3>Premium Guarantee</h3>
+      <p>10-year structural warranty on all solid wood furniture pieces.</p>
+    </div>
+  </div>-->
+</section>
+
+<!--
+
+<section class="testimonial-section desktop-testimonials">
+  <h2 class="section-title">What Our Customers Say</h2>
+
+  <div class="testimonial-carousel">
+   <button class="carousel-btn left" onclick="moveCarousel(-1)"><i class="fas fa-chevron-left"></i></button>
+    <div class="testimonial-track-wrapper">
+      <div class="testimonial-track" id="testimonialTrack">
+        <div class="testimonial-card">
+          <p class="testimonial-text">“Absolutely stunning craftsmanship. The wood quality and finish are unmatched.”</p>
+          <div class="testimonial-rating">★★★★★</div>
+          <h4 class="testimonial-author">Aarav S.</h4>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-text">“My living room has transformed. LuxeLiving truly lives up to its name.”</p>
+          <div class="testimonial-rating">★★★★☆</div>
+          <h4 class="testimonial-author">Riya M.</h4>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-text">“Impressed with the customer service and timely delivery. Five stars!”</p>
+          <div class="testimonial-rating">★★★★★</div>
+          <h4 class="testimonial-author">Dev P.</h4>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-text">“Elegant designs, durable materials. Definitely buying again.”</p>
+          <div class="testimonial-rating">★★★★☆</div>
+          <h4 class="testimonial-author">Sneha R.</h4>
+        </div>
+      </div>
+    </div>
+   <button class="carousel-btn right" onclick="moveCarousel(1)"><i class="fas fa-chevron-right"></i></button>
+  </div>
+  <div class="testimonial-dots" id="testimonialDots"></div>
+
+</section>
+
+
+<section class="testimonial-section mobile-testimonials">
+  <h2 class="section-title">What Our Customers Say</h2>
+
+  <div class="testimonial-carousel">
+  
+    <div class="testimonial-track-wrapper">
+     <div class="testimonial-track" id="mobileTestimonialTrack">
+
+        <div class="testimonial-card">
+          <p class="testimonial-text">“Absolutely stunning craftsmanship. The wood quality and finish are unmatched.”</p>
+          <div class="testimonial-rating">★★★★★</div>
+          <h4 class="testimonial-author">Aarav S.</h4>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-text">“My living room has transformed. LuxeLiving truly lives up to its name.”</p>
+          <div class="testimonial-rating">★★★★☆</div>
+          <h4 class="testimonial-author">Riya M.</h4>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-text">“Impressed with the customer service and timely delivery. Five stars!”</p>
+          <div class="testimonial-rating">★★★★★</div>
+          <h4 class="testimonial-author">Dev P.</h4>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-text">“Elegant designs, durable materials. Definitely buying again.”</p>
+          <div class="testimonial-rating">★★★★☆</div>
+          <h4 class="testimonial-author">Sneha R.</h4>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+  <div class="testimonial-dots" id="testimonialDots"></div>
+
+</section>
+
+
+-->
+<script>
+  let currentSlide = 0;
+  let autoSlideInterval;
+  const desktopTrack = document.getElementById("testimonialTrack");
+  const mobileTrack = document.getElementById("mobileTestimonialTrack");
+
+  function isMobile() {
+    return window.innerWidth <= 768;
+  }
+
+  function moveCarousel(direction) {
+    const track = isMobile() ? mobileTrack : desktopTrack;
+    const cards = track.querySelectorAll(".testimonial-card");
+    const wrapper = track.parentElement;
+    const cardWidth = cards[0].offsetWidth + 30;
+    const visibleCards = Math.floor(wrapper.offsetWidth / cardWidth);
+    const maxSlide = cards.length - visibleCards;
+
+    currentSlide += direction;
+    if (currentSlide < 0) currentSlide = maxSlide;
+    if (currentSlide > maxSlide) currentSlide = 0;
+
+    track.style.transform = `translateX(-${currentSlide * cardWidth}px)`;
+  }
+
+  function startAutoSlide() {
+    stopAutoSlide();
+    if (isMobile()) {
+      autoSlideInterval = setInterval(() => {
+        moveCarousel(1);
+      }, 5000);
+    }
+  }
+
+  function stopAutoSlide() {
+    clearInterval(autoSlideInterval);
+  }
+
+  // Touch & Mouse drag support
+  function enableSwipe(track) {
+    let isDragging = false;
+    let startX = 0;
+    let currentX = 0;
+
+    track.addEventListener('touchstart', (e) => {
+      isDragging = true;
+      startX = e.touches[0].clientX;
+    });
+
+    track.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      currentX = e.touches[0].clientX;
+    });
+
+    track.addEventListener('touchend', () => {
+      const deltaX = currentX - startX;
+      handleSwipe(deltaX);
+      isDragging = false;
+    });
+
+    track.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      startX = e.clientX;
+    });
+
+    track.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      currentX = e.clientX;
+    });
+
+    track.addEventListener('mouseup', () => {
+      const deltaX = currentX - startX;
+      handleSwipe(deltaX);
+      isDragging = false;
+    });
+
+    track.addEventListener('mouseleave', () => {
+      if (!isDragging) return;
+      const deltaX = currentX - startX;
+      handleSwipe(deltaX);
+      isDragging = false;
+    });
+
+    function handleSwipe(deltaX) {
+      const threshold = 50;
+      if (deltaX > threshold) {
+        moveCarousel(-1);
+      } else if (deltaX < -threshold) {
+        moveCarousel(1);
+      }
+    }
+  }
+
+  window.addEventListener("load", () => {
+    moveCarousel(0);
+    startAutoSlide();
+    enableSwipe(desktopTrack);
+    enableSwipe(mobileTrack);
+  });
+
+  window.addEventListener("resize", () => {
+    moveCarousel(0);
+    startAutoSlide();
+  });
+
+ 
+  function updateDots(track, dotsContainerId) {
+    const cards = track.querySelectorAll(".testimonial-card");
+    const wrapper = track.parentElement;
+    const cardWidth = cards[0].offsetWidth + 30;
+    const visibleCards = Math.floor(wrapper.offsetWidth / cardWidth);
+    const maxSlide = cards.length - visibleCards;
+
+    const dotsContainer = document.getElementById(dotsContainerId);
+    dotsContainer.innerHTML = "";
+
+    for (let i = 0; i <= maxSlide; i++) {
+      const dot = document.createElement("span");
+      dot.classList.add("dot");
+      if (i === currentSlide) dot.classList.add("active");
+      dot.addEventListener("click", () => {
+        currentSlide = i;
+        track.style.transform = `translateX(-${currentSlide * cardWidth}px)`;
+        updateDots(track, dotsContainerId);
+      });
+      dotsContainer.appendChild(dot);
+    }
+  }
+
+  function updateCarouselUI() {
+    const track = isMobile() ? mobileTrack : desktopTrack;
+    const dotsId = "testimonialDots";
+    updateDots(track, dotsId);
+  }
+
+  // Replace moveCarousel function with this
+  function moveCarousel(direction) {
+    const track = isMobile() ? mobileTrack : desktopTrack;
+    const cards = track.querySelectorAll(".testimonial-card");
+    const wrapper = track.parentElement;
+    const cardWidth = cards[0].offsetWidth + 30;
+    const visibleCards = Math.floor(wrapper.offsetWidth / cardWidth);
+    const maxSlide = cards.length - visibleCards;
+
+    currentSlide += direction;
+    if (currentSlide < 0) currentSlide = maxSlide;
+    if (currentSlide > maxSlide) currentSlide = 0;
+
+    track.style.transform = `translateX(-${currentSlide * cardWidth}px)`;
+    updateCarouselUI();
+  }
+
+  window.addEventListener("load", () => {
+    moveCarousel(0);
+    startAutoSlide();
+    enableSwipe(desktopTrack);
+    enableSwipe(mobileTrack);
+    updateCarouselUI();
+  });
+
+  window.addEventListener("resize", () => {
+    moveCarousel(0);
+    startAutoSlide();
+    updateCarouselUI();
+  });
+
+
+</script>
+
+
+<section class="signature-design-elements" data-aos="fade-up">
+  <div class="design-section-wrapper">
+    <h2 class="section-title">Signature Design Elements</h2>
+    <p class="design-subtext">
+      Our design philosophy blends heritage craftsmanship with contemporary sophistication, ensuring each piece feels iconic.
+    </p>
+
+    <div class="design-features-grid">
+      <div class="design-feature-card">
+        <div class="card-glass">
+          <img src="images/element1.webp" alt="Minimalist Symmetry" />
+          <h3>Minimalist Symmetry</h3>
+          <p>Clean lines, perfect proportions, and an aesthetic that radiates peace.</p>
+        </div>
+      </div>
+
+      <div class="design-feature-card">
+        <div class="card-glass">
+          <img src="images/element2.webp" alt="Natural Woodgrain" />
+          <h3>Natural Woodgrain</h3>
+          <p>Each grain is a fingerprint — preserved, enhanced, and celebrated.</p>
+        </div>
+      </div>
+
+      <div class="design-feature-card">
+        <div class="card-glass">
+          <img src="images/element3.jpg" alt="Sculpted Comfort" />
+          <h3>Sculpted Comfort</h3>
+          <p>Ergonomic curves meet handcrafted elegance for unmatched comfort.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+  <section id="contact">
+    <h2 class="section-title">Get in Touch</h2>
+    <p style="text-align:center;">📍 Kothamangalam, kerala, India<br>📱 +91-99947710853</p>
+  </section>
+
+
+<footer class="footer-modern">
+  <div class="footer-container">
+    <div class="footer-logo">
+      <h2>RAYYANS WOOD PARK</h2>
+      <p>Timeless handcrafted elegance for modern interiors.</p>
+    </div>
+
+    <div class="footer-columns">
+      <div class="footer-column">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="collection.html">Collection</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h3>Categories</h3>
+        <ul>
+          <li><a href="living.html">Living Series</a></li>
+          <li><a href="bedroom.html">Bedroom Series</a></li>
+          <li><a href="dining.html">Dining Series</a></li>
+          <li><a href="interior.html">Interior Series</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h3>Contact</h3>
+        <ul class="contact-info">
+          <li><i class="fas fa-map-marker-alt"></i> Kothamangalam, Kerala</li>
+        
+          <li><i class="fas fa-phone"></i> +91-99947710853</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-column">
+  <h3>Our Location</h3>
+  <div class="footer-map-embed">
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3554.865591404766!2d76.58348597450937!3d10.07823317168472!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b07e5ef6c905d37%3A0xf118cddb8eddad1c!2sRAYYANS%20WOOD%20PARK!5e1!3m2!1sen!2sin!4v1751799013925!5m2!1sen!2sin"
+      width="100%" 
+      height="180" 
+      style="border:0; border-radius: 10px;" 
+      allowfullscreen="" 
+      loading="lazy" 
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2025 Rayyans Wood Park. All rights reserved.</p>
+  </div>
+</footer>
+
+
+
+ 
+<script defer src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    AOS.init({
+      duration: 800,
+      once: true
+    });
+  });
+</script>
+<!-- Paste the full head and styles you already had -->
+
+</footer>
+<!-- Feather icons & AOS -->
+<script defer src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    AOS.init({ duration: 800, once: true });
+  });
+
+
+
+  // Hamburger menu toggle
+  window.toggleMenu = function(icon) {
+    icon.classList.toggle("active");
+    document.getElementById("nav-links").classList.toggle("show");
+  };
+</script>
+
+</body>
+</html>
+
+  <script>
+
+
+function toggleMenu(icon) {
+  icon.classList.toggle("active");
+  document.getElementById("mobile-nav-wrapper").classList.toggle("show");
+  document.body.classList.toggle("menu-open");
+}
+
+function closeMobileNav() {
+  document.querySelector('.hamburger').classList.remove("active");
+  document.getElementById("mobile-nav-wrapper").classList.remove("show");
+  document.body.classList.remove("menu-open");
+}
+
+
+let i = 0;
+let text = "Timeless Furniture. Inspired by Life.";
+function type() {
+  if (i < text.length) {
+    document.getElementById("typewriter").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(type, 60);
+  }
+}
+window.onload = type;
+
+
+  </script>
+</body>
+</html>
